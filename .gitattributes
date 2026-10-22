@@ -1,0 +1,14 @@
+# Normalize text files to LF in the repository and working tree.
+* text=auto eol=lf
+
+# Use Windows line endings for command scripts.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Keep binary images unchanged and disable text diffs and merges.
+*.ico binary -eol
+*.png binary -eol
+*.jpg binary -eol
+*.jpeg binary -eol
+*.gif binary -eol
+*.webp binary -eol
