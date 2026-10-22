@@ -41,6 +41,25 @@
                     }
                 }
             }
+        },
+        {
+            "label": "npm: test debug (web)",
+            "type": "shell",
+            "command": "npm",
+            "args": ["test", "--", "--debug", "--watch=true"],
+            "options": {
+                "cwd": "${workspaceFolder}/web"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^> ng test.*--debug",
+                    "endsPattern": "^Debugger listening on ws://127\\.0\\.0\\.1:9229/"
+                }
+            }
         }
     ]
 }

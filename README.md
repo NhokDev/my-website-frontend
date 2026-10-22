@@ -42,8 +42,18 @@ my-website/
 
 Shared EditorConfig and Prettier settings apply to files inside `web/`. Open the repository root in
 VS Code; its npm tasks target `web/`, and launch configurations resolve application sources there.
-The existing Chrome test launcher is scaffold configuration; use the terminal test command above for
-the configured Vitest runner.
+
+## Debug unit tests in VS Code
+
+Set a breakpoint in a `web/src/**/*.spec.ts` file, select **ng test** in Run and Debug, and press **F5**.
+Its task runs `npm test -- --debug --watch=true` from `web/`, waits for Vitest's Node inspector on
+`127.0.0.1:9229`, then attaches the debugger. Port 9229 must be available. Continue execution when paused;
+watch mode reruns tests after edits. This uses Angular's [test debugging](https://angular.dev/guide/testing/debugging)
+workflow, not a Karma browser page.
+
+When finished, stop debugging and use **Tasks: Terminate Task** to stop **npm: test debug (web)** before
+starting another session. For tests without a debugger, run `npm --prefix web test -- --watch=false`
+from the repository root. The **ng serve** browser launcher remains on port 4200.
 
 See the [application guide](web/README.md) for the original Angular CLI instructions and the
 [relocation task](odd/tasks/web-directory-layout.md) for scope and verification evidence. Future

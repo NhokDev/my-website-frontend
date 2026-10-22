@@ -12,11 +12,14 @@
         },
         {
             "name": "ng test",
-            "type": "chrome",
-            "request": "launch",
-            "preLaunchTask": "npm: test (web)",
-            "webRoot": "${workspaceFolder}/web",
-            "url": "http://localhost:9876/debug.html"
+            "type": "node",
+            "request": "attach",
+            "preLaunchTask": "npm: test debug (web)",
+            "address": "127.0.0.1",
+            "port": 9229,
+            "cwd": "${workspaceFolder}/web",
+            "sourceMaps": true,
+            "skipFiles": ["<node_internals>/**", "${workspaceFolder}/web/node_modules/**"]
         }
     ]
 }
