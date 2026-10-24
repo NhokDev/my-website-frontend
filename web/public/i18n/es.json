@@ -1,0 +1,75 @@
+{
+    "metadata": {
+        "titles": {
+            "home": "Inicio · Aurora",
+            "projects": "Proyectos · Aurora",
+            "notFound": "Página no encontrada · Aurora"
+        },
+        "description": "Un portafolio de aprendizaje: explorar interfaces cuidadas, construir con intención y compartir el trabajo en desarrollo."
+    },
+    "shell": {
+        "skip": "Saltar al contenido",
+        "homeLabel": "Inicio de Aurora",
+        "navigation": "Navegación principal",
+        "home": "Inicio",
+        "projects": "Proyectos",
+        "approach": "Enfoque",
+        "language": "Idioma",
+        "portfolio": "Un portafolio de aprendizaje",
+        "curiosity": "Hecho con curiosidad"
+    },
+    "home": {
+        "eyebrow": "Un espacio para crecer",
+        "headline": "Aprender construyendo",
+        "headlineAccent": "Una idea a la vez.",
+        "description": "Explorar el oficio del software mediante interfaces cuidadas y pasos pequeños y deliberados. Aquí es donde ese camino toma forma.",
+        "explore": "Explorar el taller",
+        "approachLink": "El enfoque",
+        "note": "Primero, la curiosidad. Progreso antes que perfección.",
+        "workEyebrow": "En el taller",
+        "workTitle": "Un comienzo, no una colección de éxitos.",
+        "workLink": "Ver el taller",
+        "orbit": {
+            "mindset": "La mentalidad",
+            "exploring": "Siempre explorando.",
+            "process": "El proceso",
+            "repeat": "Aprender. Crear. Repetir."
+        },
+        "approach": {
+            "eyebrow": "Cómo quiero construir",
+            "title": "Entenderlo.",
+            "titleEnd": "Crearlo. Mejorarlo.",
+            "description": "Un portafolio puede ser un lugar para practicar, no solo para presentar. El objetivo aquí es aprender de forma abierta y dejar que el trabajo crezca junto con la comprensión.",
+            "whyTitle": "Empieza por el porqué",
+            "whyDescription": "Entender el problema antes de recurrir a una herramienta.",
+            "buildTitle": "Construye con intención",
+            "buildDescription": "Mantener las interfaces claras, accesibles y útiles.",
+            "reflectTitle": "Reflexiona y mejora",
+            "reflectDescription": "Poner a prueba las ideas, detectar las carencias y dar el siguiente paso."
+        }
+    },
+    "projects": {
+        "eyebrow": "El taller",
+        "title": "Pasos pequeños. Aprendizaje real.",
+        "description": "Aún no hay demos públicas. Este es un espacio para el trabajo en desarrollo, empezando por el propio portafolio.",
+        "current": "Tomando forma",
+        "approachLink": "Explorar el enfoque"
+    },
+    "project": {
+        "caption": "Una idea que toma forma",
+        "category": "Proyecto de aprendizaje",
+        "technologies": "Tecnologías",
+        "status": { "inProgress": "En desarrollo" },
+        "portfolio": {
+            "title": "Portafolio Aurora",
+            "description": "Este mismo sitio: un proyecto de aprendizaje para transformar una idea en una interfaz clara y accesible.",
+            "nextStep": "Siguiente paso: ampliar el contenido a medida que los proyectos reales tomen forma."
+        }
+    },
+    "notFound": {
+        "eyebrow": "404 / Un poco fuera de rumbo",
+        "title": "Esta página no está en órbita.",
+        "description": "Puede que la dirección haya cambiado o que la página no exista. Volvamos a un punto de partida conocido.",
+        "home": "Volver al inicio"
+    }
+}

@@ -1,16 +1,15 @@
 export interface Project {
-    readonly title: string;
-    readonly status: 'In progress';
-    readonly description: string;
+    readonly titleKey: `project.${string}.title`;
+    readonly statusKey: 'project.status.inProgress';
+    readonly descriptionKey: `project.${string}.description`;
     readonly technologies: readonly string[];
-    readonly nextStep: string;
+    readonly nextStepKey: `project.${string}.nextStep`;
 }
 
 export const portfolioProject: Project = {
-    title: 'Aurora portfolio',
-    status: 'In progress',
-    description:
-        'This very site: a learning project in turning an idea into a clear, accessible interface.',
+    titleKey: 'project.portfolio.title',
+    statusKey: 'project.status.inProgress',
+    descriptionKey: 'project.portfolio.description',
     technologies: ['Angular', 'TypeScript', 'Tailwind CSS'],
-    nextStep: 'Next: grow the content as real projects take shape.',
+    nextStepKey: 'project.portfolio.nextStep',
 };

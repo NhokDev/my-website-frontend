@@ -2,14 +2,17 @@ import { DOCUMENT } from '@angular/common';
 import { afterNextRender, Component, inject, Injector } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-portfolio-layout',
-    imports: [RouterLink, RouterLinkActive, RouterOutlet],
+    imports: [RouterLink, RouterLinkActive, RouterOutlet, TranslocoPipe],
     templateUrl: './portfolio-layout.html',
     host: { class: 'block' },
 })
 export class PortfolioLayout {
+    protected readonly transloco = inject(TranslocoService);
+
     private readonly router = inject(Router);
     private readonly document = inject(DOCUMENT);
     private readonly injector = inject(Injector);
@@ -33,5 +36,9 @@ export class PortfolioLayout {
                 { injector: this.injector },
             );
         });
+    }
+
+    protected changeLanguage(lang: string): void {
+        if (lang === 'en' || lang === 'es') this.transloco.setActiveLang(lang);
     }
 }

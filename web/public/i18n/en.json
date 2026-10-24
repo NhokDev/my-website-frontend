@@ -1,0 +1,75 @@
+{
+    "metadata": {
+        "titles": {
+            "home": "Home · Aurora",
+            "projects": "Projects · Aurora",
+            "notFound": "Page not found · Aurora"
+        },
+        "description": "A learning portfolio: exploring thoughtful interfaces, building with intention and sharing work in progress."
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "homeLabel": "Aurora home",
+        "navigation": "Main navigation",
+        "home": "Home",
+        "projects": "Projects",
+        "approach": "Approach",
+        "language": "Language",
+        "portfolio": "A learning portfolio",
+        "curiosity": "Built with curiosity"
+    },
+    "home": {
+        "eyebrow": "A space to grow",
+        "headline": "Learning by building",
+        "headlineAccent": "One idea at a time.",
+        "description": "Exploring the craft of software through thoughtful interfaces and small, deliberate steps. This is where that journey takes shape.",
+        "explore": "Explore the workbench",
+        "approachLink": "The approach",
+        "note": "Curiosity first. Progress over perfection.",
+        "workEyebrow": "On the workbench",
+        "workTitle": "A beginning, not a highlight reel.",
+        "workLink": "View the workbench",
+        "orbit": {
+            "mindset": "The mindset",
+            "exploring": "Always exploring.",
+            "process": "The process",
+            "repeat": "Learn. Build. Repeat."
+        },
+        "approach": {
+            "eyebrow": "How I want to build",
+            "title": "Understand it.",
+            "titleEnd": "Make it. Make it better.",
+            "description": "A portfolio can be a place to practise, not just a place to present. The aim here is to learn in the open and let the work grow with the understanding.",
+            "whyTitle": "Start with why",
+            "whyDescription": "Understand the problem before reaching for a tool.",
+            "buildTitle": "Build with intention",
+            "buildDescription": "Keep interfaces clear, accessible and useful.",
+            "reflectTitle": "Reflect and refine",
+            "reflectDescription": "Test the ideas, notice the gaps and take the next step."
+        }
+    },
+    "projects": {
+        "eyebrow": "The workbench",
+        "title": "Small steps. Real learning.",
+        "description": "No public demos yet. This is a space for work in progress, starting with the portfolio itself.",
+        "current": "Currently taking shape",
+        "approachLink": "Explore the approach"
+    },
+    "project": {
+        "caption": "An idea taking shape",
+        "category": "Learning project",
+        "technologies": "Technologies",
+        "status": { "inProgress": "In progress" },
+        "portfolio": {
+            "title": "Aurora portfolio",
+            "description": "This very site: a learning project in turning an idea into a clear, accessible interface.",
+            "nextStep": "Next: grow the content as real projects take shape."
+        }
+    },
+    "notFound": {
+        "eyebrow": "404 / A little off course",
+        "title": "This page isn't in orbit.",
+        "description": "The address may have changed, or the page may not exist. Let's find a familiar starting point.",
+        "home": "Back to home"
+    }
+}

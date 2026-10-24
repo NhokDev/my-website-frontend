@@ -1,13 +1,12 @@
 <section class="route-page" aria-labelledby="projects-title">
-    <p class="eyebrow">The workbench</p>
-    <h1 id="projects-title" class="page-title">Small steps. Real learning.</h1>
+    <p class="eyebrow">{{ 'projects.eyebrow' | transloco }}</p>
+    <h1 id="projects-title" class="page-title">{{ 'projects.title' | transloco }}</h1>
     <p class="page-intro">
-        No public demos yet. This is a space for work in progress, starting with the portfolio
-        itself.
+        {{ 'projects.description' | transloco }}
     </p>
-    <h2 class="mb-6">Currently taking shape</h2>
+    <h2 class="mb-6">{{ 'projects.current' | transloco }}</h2>
     <app-project-card [project]="project" />
     <a class="text-link mt-8" routerLink="/" fragment="approach"
-        >Explore the approach <span aria-hidden="true">↗</span></a
+        >{{ 'projects.approachLink' | transloco }} <span aria-hidden="true">↗</span></a
     >
 </section>

@@ -1,11 +1,10 @@
 <section class="route-page" aria-labelledby="not-found-title">
-    <p class="eyebrow">404 / A little off course</p>
-    <h1 id="not-found-title" class="page-title">This page isn't in orbit.</h1>
+    <p class="eyebrow">{{ 'notFound.eyebrow' | transloco }}</p>
+    <h1 id="not-found-title" class="page-title">{{ 'notFound.title' | transloco }}</h1>
     <p class="page-intro">
-        The address may have changed, or the page may not exist. Let's find a familiar starting
-        point.
+        {{ 'notFound.description' | transloco }}
     </p>
     <a class="button button-primary" routerLink="/"
-        >Back to home <span aria-hidden="true">↗</span></a
+        >{{ 'notFound.home' | transloco }} <span aria-hidden="true">↗</span></a
     >
 </section>

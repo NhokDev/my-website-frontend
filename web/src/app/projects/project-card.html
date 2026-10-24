@@ -24,33 +24,33 @@
         </div>
         <span
             class="visual-caption absolute bottom-4.5 font-[ui-monospace,monospace] text-[0.65rem] leading-[normal] tracking-[0.08em] text-(--text-muted)"
-            >An idea taking shape</span
+            >{{ 'project.caption' | transloco }}</span
         >
     </div>
     <div class="project-content min-w-0 px-3 pt-3 pb-2.5">
         <div class="flex flex-wrap items-center gap-3">
-            <p class="eyebrow">Learning project</p>
+            <p class="eyebrow">{{ 'project.category' | transloco }}</p>
             <span
                 class="status rounded-[999px] border border-tertiary px-2.25 py-1 text-[0.7rem] text-(--text-success)"
-                >{{ project().status }}</span
+                >{{ project().statusKey | transloco }}</span
             >
         </div>
         <h3 class="mt-4.5 mb-3 text-[1.65rem] font-[650] tracking-[-0.04em] wrap-anywhere">
-            {{ project().title }}
+            {{ project().titleKey | transloco }}
         </h3>
         <p class="description text-[0.875rem] leading-[1.8] text-(--text-muted)">
-            {{ project().description }}
+            {{ project().descriptionKey | transloco }}
         </p>
         <ul
             class="my-4.5 flex list-none flex-wrap gap-2 p-0 *:rounded-[7px] *:border *:border-(--border) *:px-2.5 *:py-1.25 *:text-[0.7rem] *:text-(--text-muted)"
-            aria-label="Technologies"
+            [attr.aria-label]="'project.technologies' | transloco"
         >
             @for (technology of project().technologies; track technology) {
                 <li>{{ technology }}</li>
             }
         </ul>
         <p class="next-step text-[0.8rem] leading-[1.8] text-(--text-muted)">
-            {{ project().nextStep }}
+            {{ project().nextStepKey | transloco }}
         </p>
     </div>
 </article>

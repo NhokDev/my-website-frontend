@@ -1,13 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter, Router, TitleStrategy } from '@angular/router';
 import { App } from './app';
 import { routes } from './app.routes';
+import { LocalizedTitleStrategy } from './i18n/localized-title-strategy';
+import { translocoTesting } from './i18n/testing';
 
 describe('App', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [App],
-            providers: [provideRouter(routes)],
+            imports: [App, translocoTesting()],
+            providers: [
+                provideRouter(routes),
+                { provide: TitleStrategy, useClass: LocalizedTitleStrategy },
+            ],
         }).compileComponents();
     });
 

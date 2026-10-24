@@ -8,30 +8,30 @@
                 class="eyebrow-line mr-2.5 inline-block h-0.5 w-6 bg-secondary align-middle"
                 aria-hidden="true"
             ></span>
-            A space to grow
+            {{ 'home.eyebrow' | transloco }}
         </p>
         <h1
             id="home-title"
             class="mt-5 mb-6.5 max-w-165 text-[clamp(2.8rem,5.2vw,4.5rem)] leading-[1.07] font-[750] tracking-[-0.065em] wrap-anywhere [@media(max-width:800px)]:text-[clamp(2.65rem,8vw,4rem)]"
         >
-            Learning by building<span class="hero-accent text-(--text-accent)"
-                >.<br />One idea at a time.</span
+            {{ 'home.headline' | transloco
+            }}<span class="hero-accent text-(--text-accent)"
+                >.<br />{{ 'home.headlineAccent' | transloco }}</span
             >
         </h1>
         <p class="hero-description mb-7 max-w-112.5 text-base leading-[1.85] text-(--text-muted)">
-            Exploring the craft of software through thoughtful interfaces and small, deliberate
-            steps. This is where that journey takes shape.
+            {{ 'home.description' | transloco }}
         </p>
         <div class="flex flex-wrap items-center gap-3">
             <a class="button button-primary" routerLink="/projects"
-                >Explore the workbench <span aria-hidden="true">↗</span></a
+                >{{ 'home.explore' | transloco }} <span aria-hidden="true">↗</span></a
             >
             <a class="button button-secondary" routerLink="/" fragment="approach"
-                >The approach <span aria-hidden="true">↓</span></a
+                >{{ 'home.approachLink' | transloco }} <span aria-hidden="true">↓</span></a
             >
         </div>
         <p class="hero-note mt-6.5 text-[0.8rem] text-(--text-muted)">
-            Curiosity first. Progress over perfection.
+            {{ 'home.note' | transloco }}
         </p>
     </div>
     <app-orbital-art />
@@ -40,11 +40,11 @@
 <section class="work-section pt-4 pb-17" aria-labelledby="work-title">
     <div class="section-heading mb-6.5 flex flex-wrap items-end justify-between gap-4">
         <div>
-            <p class="eyebrow">On the workbench</p>
-            <h2 id="work-title">A beginning, not a highlight reel.</h2>
+            <p class="eyebrow">{{ 'home.workEyebrow' | transloco }}</p>
+            <h2 id="work-title">{{ 'home.workTitle' | transloco }}</h2>
         </div>
         <a class="text-link" routerLink="/projects"
-            >View the workbench <span aria-hidden="true">↗</span></a
+            >{{ 'home.workLink' | transloco }} <span aria-hidden="true">↗</span></a
         >
     </div>
     <app-project-card [project]="project" />
@@ -57,11 +57,12 @@
     aria-labelledby="approach-title"
 >
     <div>
-        <p class="eyebrow">How I want to build</p>
-        <h2 id="approach-title">Understand it.<br />Make it. Make it better.</h2>
+        <p class="eyebrow">{{ 'home.approach.eyebrow' | transloco }}</p>
+        <h2 id="approach-title">
+            {{ 'home.approach.title' | transloco }}<br />{{ 'home.approach.titleEnd' | transloco }}
+        </h2>
         <p class="section-description mt-5.5 max-w-112.5 leading-[1.8] text-(--text-muted)">
-            A portfolio can be a place to practise, not just a place to present. The aim here is to
-            learn in the open and let the work grow with the understanding.
+            {{ 'home.approach.description' | transloco }}
         </p>
     </div>
     <ol
@@ -70,22 +71,22 @@
         <li>
             <span aria-hidden="true">01</span>
             <div>
-                <h3>Start with why</h3>
-                <p>Understand the problem before reaching for a tool.</p>
+                <h3>{{ 'home.approach.whyTitle' | transloco }}</h3>
+                <p>{{ 'home.approach.whyDescription' | transloco }}</p>
             </div>
         </li>
         <li>
             <span aria-hidden="true">02</span>
             <div>
-                <h3>Build with intention</h3>
-                <p>Keep interfaces clear, accessible and useful.</p>
+                <h3>{{ 'home.approach.buildTitle' | transloco }}</h3>
+                <p>{{ 'home.approach.buildDescription' | transloco }}</p>
             </div>
         </li>
         <li>
             <span aria-hidden="true">03</span>
             <div>
-                <h3>Reflect and refine</h3>
-                <p>Test the ideas, notice the gaps and take the next step.</p>
+                <h3>{{ 'home.approach.reflectTitle' | transloco }}</h3>
+                <p>{{ 'home.approach.reflectDescription' | transloco }}</p>
             </div>
         </li>
     </ol>

@@ -1,4 +1,4 @@
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content">{{ 'shell.skip' | transloco }}</a>
 <div class="site-frame flex min-h-dvh flex-col [background:var(--gradient-aurora)]">
     <header class="site-header page-width py-6 [@media(max-width:540px)]:py-4">
         <div
@@ -7,7 +7,7 @@
             <a
                 class="brand inline-flex min-h-11 items-center gap-2 text-[1.3rem] font-[750] tracking-[-0.055em] [@media(max-width:540px)]:w-full [@media(max-width:540px)]:justify-center"
                 routerLink="/"
-                aria-label="Aurora home"
+                [attr.aria-label]="'shell.homeLabel' | transloco"
             >
                 <span
                     class="brand-mark grid size-8.5 place-items-center rounded-[10px] bg-primary text-[1.5rem] text-(--on-primary)"
@@ -18,20 +18,69 @@
             </a>
             <nav
                 class="flex flex-wrap items-center gap-1 *:inline-flex *:min-h-11 *:items-center *:gap-1.5 *:rounded-[10px] *:px-3 *:py-2 *:text-[0.875rem] *:text-(--text-muted)! sm:gap-3 [&>a:hover]:bg-(--surface-solid) [&>a:hover]:text-(--text)! [&>a.current]:bg-(--surface-solid) [&>a.current]:text-(--text)! [&>a.current]:underline! [&>a.current]:decoration-secondary! [&>a.current]:underline-offset-[7px]! [@media(max-width:540px)]:*:px-2.5"
-                aria-label="Main navigation"
+                [attr.aria-label]="'shell.navigation' | transloco"
             >
                 <a
                     routerLink="/"
                     routerLinkActive="current"
                     [routerLinkActiveOptions]="{ exact: true }"
                     ariaCurrentWhenActive="page"
-                    >Home</a
+                    >{{ 'shell.home' | transloco }}</a
                 >
-                <a routerLink="/projects" routerLinkActive="current" ariaCurrentWhenActive="page"
-                    >Projects</a
+                <a routerLink="/projects" routerLinkActive="current" ariaCurrentWhenActive="page">{{
+                    'shell.projects' | transloco
+                }}</a>
+                <a routerLink="/" fragment="approach"
+                    >{{ 'shell.approach' | transloco }} <span aria-hidden="true">↗</span></a
                 >
-                <a routerLink="/" fragment="approach">Approach <span aria-hidden="true">↗</span></a>
             </nav>
+            <div
+                role="group"
+                [attr.aria-label]="'shell.language' | transloco"
+                class="inline-flex shrink-0 items-center gap-1 rounded-full border border-(--border) bg-neutral/60 p-1 shadow-[inset_0_1px_0_#ffffff08] backdrop-blur-xl"
+            >
+                <button
+                    type="button"
+                    lang="es"
+                    aria-label="Español"
+                    [attr.aria-pressed]="transloco.getActiveLang() === 'es'"
+                    (click)="changeLanguage('es')"
+                    class="inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-transparent px-3 text-sm font-semibold text-(--text-muted) hover:text-(--text) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--focus) aria-pressed:border-white/15 aria-pressed:bg-white/12 aria-pressed:text-(--text) aria-pressed:shadow-[0_2px_6px_#00000026,inset_0_1px_0_#ffffff14]"
+                >
+                    <svg
+                        class="h-3.5 w-5 shrink-0 rounded-[3px]"
+                        viewBox="0 0 60 40"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+                        <path fill="#aa151b" d="M0 0h60v40H0z" />
+                        <path fill="#f1bf00" d="M0 10h60v20H0z" />
+                    </svg>
+                    ES
+                </button>
+                <button
+                    type="button"
+                    lang="en"
+                    aria-label="English"
+                    [attr.aria-pressed]="transloco.getActiveLang() === 'en'"
+                    (click)="changeLanguage('en')"
+                    class="inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-transparent px-3 text-sm font-semibold text-(--text-muted) hover:text-(--text) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--focus) aria-pressed:border-white/15 aria-pressed:bg-white/12 aria-pressed:text-(--text) aria-pressed:shadow-[0_2px_6px_#00000026,inset_0_1px_0_#ffffff14]"
+                >
+                    <svg
+                        class="h-3.5 w-5 shrink-0 rounded-[3px]"
+                        viewBox="0 0 60 40"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+                        <path fill="#012169" d="M0 0h60v40H0z" />
+                        <path stroke="#fff" stroke-width="8" d="m0 0 60 40M60 0 0 40" />
+                        <path stroke="#c8102e" stroke-width="3" d="m0 0 60 40M60 0 0 40" />
+                        <path stroke="#fff" stroke-width="12" d="M30 0v40M0 20h60" />
+                        <path stroke="#c8102e" stroke-width="6" d="M30 0v40M0 20h60" />
+                    </svg>
+                    EN
+                </button>
+            </div>
         </div>
     </header>
     <main id="main-content" class="page-width flex-1" tabindex="-1">
@@ -41,9 +90,9 @@
         <div
             class="footer-inner mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-(--border) py-7 text-[0.8rem] text-(--text-muted) [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_span]:mx-2"
         >
-            <p>Aurora <span aria-hidden="true">/</span> A learning portfolio</p>
+            <p>Aurora <span aria-hidden="true">/</span> {{ 'shell.portfolio' | transloco }}</p>
             <a routerLink="/" fragment="approach"
-                >Built with curiosity <span aria-hidden="true">↗</span></a
+                >{{ 'shell.curiosity' | transloco }} <span aria-hidden="true">↗</span></a
             >
         </div>
     </footer>
