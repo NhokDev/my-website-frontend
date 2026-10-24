@@ -1,0 +1,56 @@
+<article class="project-card glass grid gap-6 rounded-3xl p-4.5 md:grid-cols-[0.7fr_1fr]">
+    <div
+        class="project-visual relative grid min-h-59.5 place-items-center overflow-hidden rounded-[14px] border border-(--border) [background:var(--gradient-aurora)]"
+        aria-hidden="true"
+    >
+        <div
+            class="visual-window w-[76%] max-w-72.5 rounded-[10px] border border-[#cdb6ef77] bg-(--surface-solid) p-3.5 [box-shadow:0_15px_40px_#120d1d88] transform-[rotate(-5deg)_translateY(-5px)]"
+        >
+            <div
+                class="window-bar flex items-center gap-1.25 *:size-1 *:rounded-[50%] *:bg-(--text-accent)"
+            >
+                <i></i><i></i><i></i>
+            </div>
+            <div class="window-body flex items-center justify-between gap-1.25 pt-5.5 pb-3.5">
+                <div
+                    class="visual-lines w-[53%] *:my-2.25 *:block *:h-1.25 *:rounded-sm *:bg-(--text-muted) [&>i:first-child]:h-2.5 [&>i:first-child]:bg-(--text-accent) [&>i:last-child]:w-[65%]"
+                >
+                    <i></i><i></i><i></i>
+                </div>
+                <div
+                    class="visual-orb size-15.5 rounded-[50%] [background:radial-gradient(circle_at_30%_25%,#e9e1ff,var(--color-primary)_45%,#321248_85%)]"
+                ></div>
+            </div>
+        </div>
+        <span
+            class="visual-caption absolute bottom-4.5 font-[ui-monospace,monospace] text-[0.65rem] leading-[normal] tracking-[0.08em] text-(--text-muted)"
+            >An idea taking shape</span
+        >
+    </div>
+    <div class="project-content min-w-0 px-3 pt-3 pb-2.5">
+        <div class="flex flex-wrap items-center gap-3">
+            <p class="eyebrow">Learning project</p>
+            <span
+                class="status rounded-[999px] border border-tertiary px-2.25 py-1 text-[0.7rem] text-(--text-success)"
+                >{{ project().status }}</span
+            >
+        </div>
+        <h3 class="mt-4.5 mb-3 text-[1.65rem] font-[650] tracking-[-0.04em] wrap-anywhere">
+            {{ project().title }}
+        </h3>
+        <p class="description text-[0.875rem] leading-[1.8] text-(--text-muted)">
+            {{ project().description }}
+        </p>
+        <ul
+            class="my-4.5 flex list-none flex-wrap gap-2 p-0 *:rounded-[7px] *:border *:border-(--border) *:px-2.5 *:py-1.25 *:text-[0.7rem] *:text-(--text-muted)"
+            aria-label="Technologies"
+        >
+            @for (technology of project().technologies; track technology) {
+                <li>{{ technology }}</li>
+            }
+        </ul>
+        <p class="next-step text-[0.8rem] leading-[1.8] text-(--text-muted)">
+            {{ project().nextStep }}
+        </p>
+    </div>
+</article>

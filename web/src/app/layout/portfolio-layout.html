@@ -1,0 +1,50 @@
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="site-frame flex min-h-dvh flex-col [background:var(--gradient-aurora)]">
+    <header class="site-header page-width py-6 [@media(max-width:540px)]:py-4">
+        <div
+            class="glass nav-bar flex flex-wrap items-center justify-between gap-3 rounded-[18px] px-4.5 py-2.5 [@media(max-width:540px)]:justify-center [@media(max-width:540px)]:gap-0.5 [@media(max-width:540px)]:px-2.5"
+        >
+            <a
+                class="brand inline-flex min-h-11 items-center gap-2 text-[1.3rem] font-[750] tracking-[-0.055em] [@media(max-width:540px)]:w-full [@media(max-width:540px)]:justify-center"
+                routerLink="/"
+                aria-label="Aurora home"
+            >
+                <span
+                    class="brand-mark grid size-8.5 place-items-center rounded-[10px] bg-primary text-[1.5rem] text-(--on-primary)"
+                    aria-hidden="true"
+                    >✳</span
+                >
+                aurora<span class="brand-dot -ml-1.75 text-secondary" aria-hidden="true">.</span>
+            </a>
+            <nav
+                class="flex flex-wrap items-center gap-1 *:inline-flex *:min-h-11 *:items-center *:gap-1.5 *:rounded-[10px] *:px-3 *:py-2 *:text-[0.875rem] *:text-(--text-muted)! sm:gap-3 [&>a:hover]:bg-(--surface-solid) [&>a:hover]:text-(--text)! [&>a.current]:bg-(--surface-solid) [&>a.current]:text-(--text)! [&>a.current]:underline! [&>a.current]:decoration-secondary! [&>a.current]:underline-offset-[7px]! [@media(max-width:540px)]:*:px-2.5"
+                aria-label="Main navigation"
+            >
+                <a
+                    routerLink="/"
+                    routerLinkActive="current"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    ariaCurrentWhenActive="page"
+                    >Home</a
+                >
+                <a routerLink="/projects" routerLinkActive="current" ariaCurrentWhenActive="page"
+                    >Projects</a
+                >
+                <a routerLink="/" fragment="approach">Approach <span aria-hidden="true">↗</span></a>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content" class="page-width flex-1" tabindex="-1">
+        <router-outlet />
+    </main>
+    <footer class="page-width">
+        <div
+            class="footer-inner mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-(--border) py-7 text-[0.8rem] text-(--text-muted) [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_span]:mx-2"
+        >
+            <p>Aurora <span aria-hidden="true">/</span> A learning portfolio</p>
+            <a routerLink="/" fragment="approach"
+                >Built with curiosity <span aria-hidden="true">↗</span></a
+            >
+        </div>
+    </footer>
+</div>

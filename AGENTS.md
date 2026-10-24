@@ -5,7 +5,8 @@ It does not replace the orchestrator, change instruction priorities, or disable 
 
 ## Purpose
 
-Developer portfolio website, currently at the base Angular welcome-screen stage.
+Learning-focused developer portfolio with an Aurora home, an in-progress project workbench, and a shared Angular shell.
+Design reference: `docs/portfolio_aurora_glass_3d/`; current palette and implementation scope: `odd/tasks/aurora-home-foundation.md`.
 Preserve existing UI and content unless a redesign or content change is explicitly requested.
 No backend or server-side rendering architecture has been selected.
 
@@ -25,7 +26,7 @@ There is no root npm package or wrapper workspace. Open the repository root in t
 
 - Angular 22 with TypeScript, standalone components, routing, and client-side rendering.
 - Tailwind CSS 4 through `@tailwindcss/postcss`; PostCSS configuration stays in `web/`.
-- Global Tailwind entry: `web/src/styles.css`. Component SCSS may coexist with it.
+- Global Tailwind entry and shared design tokens: `web/src/styles.css`. Do not use SCSS or Sass.
 - Vitest is the configured unit-test runner; do not infer the runner from the Chrome launch preset.
 - Use Node.js 24 and npm 11. Check `web/package.json` and `web/package-lock.json` for
   dependency ranges, resolved versions, and package-manager details rather than freezing patch versions here.
@@ -47,6 +48,11 @@ do not apply quote overrides or run a repository-wide formatting rewrite.
 
 ## Conventions
 
+- Use Tailwind CSS utilities for component styling. Never create or use `.scss` files,
+  Sass syntax, or SCSS references in component or workspace configuration.
+- Every Angular component must have its own external `.html` template referenced through
+  `templateUrl`. Never use an inline `template`, including for small or not-found components.
+  Keep the HTML file beside its component, for example `not-found.ts` and `not-found.html`.
 - Follow shared configuration: four spaces, no tabs, single quotes where applicable,
   and a Prettier print width of 100. HTML uses the Angular parser.
 - Use LF for text according to `.gitattributes`; retain Windows batch and binary exceptions.

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#090d20" />
+  <meta name="description" content="Interactive portfolio concept combining Aurora gradients, glassmorphism and a CSS-based immersive 3D hero." />
+  <title>Portfolio Concept — Aurora · Glass · 3D</title>
+  <style>
+    /* =========================================================
+       DESIGN TOKENS / CUSTOMISE THESE FIRST
+       The 3D illustration below is CSS-based (no WebGL needed).
+       ========================================================= */
+    :root {
+      --bg: #090d20;
+      --bg-2: #101630;
+      --surface: rgba(255,255,255,.075);
+      --surface-strong: rgba(255,255,255,.105);
+      --stroke: rgba(255,255,255,.18);
+      --text: #f5f7ff;
+      --muted: #aeb7d4;
+      --purple: #865ef2;
+      --violet: #b568ed;
+      --cyan: #50c9fa;
+      --mint: #9debd6;
+      --radius: 22px;
+      --width: 1140px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #070a14; color: var(--text); }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--mint); outline-offset: 4px; }
+    ::selection { background: #9072df; color: #fff; }
+
+    .demo-bar { background: #0f1525; border-bottom: 1px solid #2e374b; position: relative; z-index: 10; }
+    .demo-bar-inner { max-width: var(--width); margin: auto; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .demo-intro { display: flex; align-items: center; gap: 11px; }
+    .demo-icon { display: grid; place-items: center; width: 34px; height: 34px; color: #ebe7ff; border: 1px solid #5c5386; background: #302a50; border-radius: 10px; font-size: 18px; }
+    .demo-intro strong { display: block; font-size: 13px; letter-spacing: -.1px; }
+    .demo-intro small { display: block; color: #aeb9cb; font-size: 11px; margin-top: 3px; }
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .control { cursor: pointer; padding: 8px 12px; min-height: 38px; border: 1px solid #454d64; background: #1a2032; color: #acb7ce; border-radius: 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 650; transition: border-color .2s, background .2s, color .2s; }
+    .control .led { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #586078; }
+    .control[aria-pressed="true"] { background: #312a56; border-color: #8d78d1; color: #fff; }
+    .control[aria-pressed="true"] .led { background: #a8f8dd; box-shadow: 0 0 9px #96fbd58a; }
+    .reset { cursor: pointer; padding: 8px 10px; min-height: 38px; border: 0; background: transparent; color: #c2c8d8; font-size: 12px; }
+    .reset:hover { color: #fff; }
+
+    .portfolio { isolation: isolate; position: relative; background: var(--bg); overflow: hidden; min-height: 100vh; transition: background .4s ease; }
+    .portfolio::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(#ffffff3d .6px, transparent .6px); background-size: 34px 34px; opacity: .10; z-index: -1; }
+    .ambient { position: absolute; z-index: -2; inset: 0; pointer-events: none; overflow: hidden; }
+    .glow { position: absolute; border-radius: 50%; filter: blur(78px); opacity: .85; will-change: transform; animation: drift 17s ease-in-out infinite alternate; transition: opacity .45s ease; }
+    .glow-one { width: 570px; height: 540px; background: radial-gradient(circle, #8744cbad, #8446ad5c 45%, transparent 71%); left: 49%; top: -235px; }
+    .glow-two { width: 650px; height: 550px; background: radial-gradient(circle, #1166b79c, #0e51806a 42%, transparent 70%); left: -350px; top: 170px; animation-delay: -6s; }
+    .glow-three { width: 610px; height: 460px; background: radial-gradient(circle, #19ac9c91, #7655ba5a 47%, transparent 71%); right: -250px; top: 690px; animation-delay: -10s; }
+    .glow-four { width: 510px; height: 450px; background: radial-gradient(circle, #954fd084, transparent 68%); left: 14%; top: 1200px; animation-delay: -12s; }
+    @keyframes drift { from { transform: translate(-28px,-12px) scale(.97); } to { transform: translate(36px,28px) scale(1.1); } }
+    .container { max-width: var(--width); padding: 0 28px; margin: 0 auto; }
+
+    /* 03 — Glassmorphism */
+    .glass { background: var(--surface); border: 1px solid var(--stroke); box-shadow: 0 16px 48px #01030e34, inset 0 1px 0 #ffffff12; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: background .3s, border-color .3s, box-shadow .3s; }
+    .site-header { padding-top: 25px; }
+    .nav { min-height: 70px; border-radius: 18px; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 13px 21px; }
+    .brand { font-size: 18px; letter-spacing: -.8px; font-weight: 850; display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+    .brand-mark { font-size: 19px; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; color: #1a1642; background: linear-gradient(125deg, #d8d2ff, #8f77f6); box-shadow: 0 0 23px #af82f959; }
+    .nav-links { display: flex; gap: clamp(13px, 3vw, 30px); align-items: center; color: #d0d5e9; font-size: 13px; }
+    .nav-links a:hover { color: white; }
+    .nav-contact { border: 1px solid #ffffff53; border-radius: 999px; padding: 10px 16px; font-size: 12px; font-weight: 700; white-space: nowrap; transition: background .2s; }
+    .nav-contact:hover { background: #ffffff1e; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(0, .88fr); gap: 26px; min-height: 590px; align-items: center; padding: 90px 12px 78px; }
+    .hero-copy { position: relative; z-index: 2; }
+    .availability { display: inline-flex; align-items: center; gap: 9px; color: #baf4db; font-size: 12px; font-weight: 700; letter-spacing: .2px; margin-bottom: 25px; }
+    .availability::before { content: ""; width: 8px; height: 8px; background: #77f4bd; border-radius: 50%; box-shadow: 0 0 0 4px #77f4bd26,0 0 17px #77f4bd9b; }
+    .hero h1 { font-size: clamp(48px, 6.4vw, 79px); font-weight: 780; line-height: 1.05; letter-spacing: -.065em; margin: 0; }
+    .gradient-text { display: inline-block; background: linear-gradient(95deg, #cfb9ff, #91dffc 60%, #b0f4df); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .hero .lede { color: #bbc3dc; font-size: clamp(14px, 1.4vw, 16px); line-height: 1.8; max-width: 465px; margin: 25px 0 30px; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; min-height: 45px; font-size: 13px; font-weight: 750; border-radius: 12px; padding: 12px 19px; transition: transform .2s, background .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #252044; background: #f0edff; box-shadow: 0 8px 30px #b5a1ff26; }
+    .btn-primary:hover { background: #fff; }
+    .btn-text { color: #dde1fb; }
+    .btn-text:hover { background: #ffffff16; }
+    .hero-foot { display: flex; gap: 16px; color: #aeb8d5; font-size: 12px; margin-top: 33px; }
+    .hero-foot .line { width: 25px; height: 1px; background: #7d85aa; align-self: center; }
+
+    /* 08 — CSS 3D orbital illustration; replace with Three.js if needed */
+    .scene { position: relative; height: 410px; display: grid; place-items: center; perspective: 900px; }
+    .scene-halo { position: absolute; width: 310px; height: 310px; border-radius: 50%; background: #7a57ed78; filter: blur(78px); opacity: .7; }
+    .orbital { position: relative; width: 330px; height: 330px; transform-style: preserve-3d; animation: float 7s ease-in-out infinite; filter: drop-shadow(0 23px 45px #1c125b6a); }
+    .planet { position: absolute; inset: 49px; border-radius: 50%; background: radial-gradient(ellipse at 28% 19%, #e2fcff 0%, #bbcaff 11%, #b593f3 26%, #7053d0 44%, #2c2f8f 67%, #0b1049 91%); box-shadow: inset -20px -28px 42px #0b0c4fc7, inset 8px 12px 24px #f0ccff9c, 0 0 60px #765bea59; transform: rotate(-21deg); }
+    .planet::after { content: ""; position: absolute; inset: 8%; border-radius: 50%; background: repeating-radial-gradient(ellipse at 60% 73%,transparent 0 18px,#c1d9ff17 19px 20px); mix-blend-mode: screen; }
+    .ring-back, .ring-front { position: absolute; inset: 105px -5px; border-radius: 50%; border: 12px solid #bfbeff; transform: rotate(-27deg) rotateX(58deg); box-shadow: 0 0 18px #8780fc6a, inset 0 0 19px #fff5; }
+    .ring-back { opacity: .6; filter: brightness(.6); }
+    .ring-front { clip-path: polygon(0 48%,100% 48%,100% 100%,0 100%); border-color: #b7bdff; filter: drop-shadow(0 4px 4px #252262); }
+    .fine-ring { position: absolute; inset: 48px 24px; border-radius: 50%; border: 2px solid #cbf8ff7a; transform: rotate(49deg) rotateX(67deg); }
+    .sparkle { position: absolute; width: 7px; height: 7px; background: #d8fbff; border-radius: 50%; box-shadow: 0 0 13px #aff0ff; }
+    .sp1 { top: 58px; right: 56px; }.sp2 { bottom: 57px; left: 26px; width: 4px; height: 4px; }.sp3 { top: 93px; left: 25px; width: 3px; height: 3px; }
+    .float-pill { position: absolute; z-index: 2; padding: 13px 17px; border-radius: 16px; min-width: 146px; transform: rotate(5deg); }
+    .float-pill small { display: block; color: #c1c9e2; font-size: 11px; margin-bottom: 5px; }
+    .float-pill strong { display: block; font-size: 13px; }
+    .pill-one { right: 0; top: 60px; }.pill-two { left: -2%; bottom: 34px; transform: rotate(-5deg); }
+    .alt-hero { display: none; padding: 33px; border-radius: 24px; max-width: 340px; text-align: center; }
+    .alt-hero .alt-icon { display: block; font-size: 46px; margin-bottom: 16px; color: #b5adff; }
+    .alt-hero strong { display: block; font-size: 23px; letter-spacing: -.7px; }
+    .alt-hero p { color: var(--muted); line-height: 1.6; font-size: 13px; }
+    @keyframes float { 0%,100% { transform: translateY(7px) rotate(-3deg); } 50% { transform: translateY(-14px) rotate(4deg); } }
+
+    .section { position: relative; z-index: 1; padding-top: 39px; padding-bottom: 76px; scroll-margin-top: 20px; }
+    .eyebrow { text-transform: uppercase; color: #b7a8ff; font-size: 11px; letter-spacing: .18em; font-weight: 750; margin-bottom: 13px; }
+    .section-title { display: flex; justify-content: space-between; align-items: end; gap: 18px; margin-bottom: 25px; }
+    .section-title h2 { font-size: clamp(27px,3vw,40px); letter-spacing: -.05em; line-height: 1.18; margin: 0; }
+    .section-title p { max-width: 340px; color: #aeb7d1; font-size: 13px; line-height: 1.65; margin: 0; }
+    .project-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+    .project { border-radius: var(--radius); padding: 13px; min-width: 0; transition: transform .22s, border-color .22s; }
+    .project:hover { transform: translateY(-5px); border-color: #ffffff60; }
+    .project-art { height: 178px; border-radius: 14px; position: relative; overflow: hidden; }
+    .art-analytics { background: radial-gradient(circle at 10% 15%,#4b79b0,#222b77 52%,#18184c); }
+    .art-creative { background: radial-gradient(circle at 65% 22%,#ae579a,#60366e 50%,#25204e); }
+    .art-cloud { background: radial-gradient(circle at 65% 10%,#248d8c,#1b466f 52%,#122a47); }
+    .art-glare { position: absolute; width: 145px; height: 145px; border-radius: 50%; filter: blur(35px); right: -20px; bottom: -35px; background: #a978ea70; }
+    .mock-window { position: absolute; left: 16%; right: 12%; bottom: -8px; top: 28px; border-radius: 11px 11px 0 0; border: 1px solid #ffffff70; background: #ffffff18; box-shadow: 0 12px 26px #12112f50; padding: 15px; transform: rotate(-3deg); }
+    .mock-dots { display: flex; gap: 5px; }.mock-dots i { width: 6px; height: 6px; border-radius: 50%; background: #e8ddff; opacity: .85; }
+    .mock-stats { display: flex; gap: 8px; margin-top: 13px; }.mock-stats i { display: block; flex: 1; height: 16px; border-radius: 5px; background: #ffffff38; }
+    .mock-chart { display: flex; align-items: end; gap: 7px; height: 55px; margin-top: 13px; border-bottom: 1px solid #ffffff5e; }
+    .mock-chart i { flex: 1; height: var(--h); background: linear-gradient(#c6e5ff,#9a8aff); border-radius: 5px 5px 0 0; }
+    .shape-cube { width: 90px; height: 82px; border-radius: 23px; position: absolute; left: calc(50% - 45px); top: 44px; transform: rotate(-27deg) skew(8deg,7deg); background: linear-gradient(135deg,#f5d8ff,#a779ec 47%,#7346c9); box-shadow: 16px 17px 0 #33256d, 24px 28px 31px #200d5b88, inset 6px 5px 14px #ffffff78; }
+    .shape-cube::before { content: ""; position: absolute; inset: 18px; border: 2px solid #ffffff85; border-radius: 14px; }
+    .cloud-network { position: absolute; inset: 30px 34px; }
+    .cloud-network svg { width: 100%; height: 100%; filter: drop-shadow(0 0 9px #aafded77); }
+    .project-meta { padding: 18px 8px 8px; }
+    .project-meta small { text-transform: uppercase; letter-spacing: .11em; color: #b8adf7; font-size: 10px; font-weight: 760; }
+    .project-meta h3 { margin: 9px 0 7px; font-size: 21px; letter-spacing: -.7px; }
+    .project-meta p { color: #b4bed8; font-size: 13px; line-height: 1.65; margin: 0 0 17px; min-height: 43px; }
+    .project-meta button { background: transparent; border: 0; cursor: pointer; color: #e2e7ff; font-size: 12px; font-weight: 760; padding: 3px 0; }
+    .project-meta button:hover { color: #a1e6ff; }
+    .tech-list { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 7px; }
+    .tech-list span { color: #d3d5ee; background: #ffffff13; border: 1px solid #ffffff19; font-size: 10px; border-radius: 6px; padding: 5px 8px; }
+
+    .about-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+    .about-panel, .skills-panel { border-radius: var(--radius); padding: clamp(23px,4vw,42px); }
+    .about-panel h3 { font-size: clamp(24px,2.6vw,35px); line-height: 1.2; letter-spacing: -.04em; margin: 0 0 19px; }
+    .about-panel p { color: #c0c7df; font-size: 14px; line-height: 1.9; margin: 0 0 14px; }
+    .about-panel p:last-child { margin-bottom: 0; }
+    .skills-panel h3 { font-size: 18px; margin: 0 0 23px; }
+    .skill { display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid #ffffff24; padding: 16px 0; color: #ebecff; font-size: 13px; }
+    .skill:first-of-type { padding-top: 0; }.skill:last-child { border: 0; padding-bottom: 0; }
+    .skill span:last-child { color: #adb9d8; text-align: right; }
+    .contact { margin: 12px 0 70px; padding: clamp(28px,5vw,58px); border-radius: 28px; text-align: center; position: relative; overflow: hidden; }
+    .contact::before { content: ""; position: absolute; inset: auto 14% -165px; height: 250px; border-radius: 50%; background: #6867ec4b; filter: blur(60px); pointer-events: none; }
+    .contact > * { position: relative; }
+    .contact h2 { margin: 8px 0 16px; font-size: clamp(35px,5vw,59px); letter-spacing: -.06em; line-height: 1.1; }
+    .contact p { max-width: 520px; margin: 0 auto 24px; color: #bac5df; line-height: 1.7; font-size: 14px; }
+    .footer { border-top: 1px solid #ffffff24; padding: 28px 0 35px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; color: #a9b2cf; font-size: 12px; }
+    .footer a { color: #d8e2ff; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* Interactive comparative states */
+    .portfolio.no-aurora .glow { opacity: 0; }
+    .portfolio.no-aurora { background: #12182c; }
+    .portfolio.no-glass .glass { background: #202940; border-color: #36415a; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
+    .portfolio.no-3d .orbital, .portfolio.no-3d .scene-halo, .portfolio.no-3d .float-pill, .portfolio.no-3d .sparkle { display: none; }
+    .portfolio.no-3d .alt-hero { display: block; }
+
+    /* Accessible project dialog */
+    .project-dialog { color: var(--text); max-width: 520px; width: calc(100% - 30px); padding: 29px; border: 1px solid #66618e; border-radius: 22px; background: #171d37; box-shadow: 0 25px 95px #000b; }
+    .project-dialog::backdrop { background: #030613bd; backdrop-filter: blur(5px); }
+    .project-dialog h2 { margin: 0 40px 12px 0; font-size: 28px; letter-spacing: -.8px; }
+    .project-dialog p { color: #c2cbe1; line-height: 1.75; }
+    .dialog-close { position: absolute; right: 17px; top: 14px; cursor: pointer; color: #f2f2ff; border: 1px solid #ffffff40; background: #ffffff10; width: 36px; height: 36px; border-radius: 10px; font-size: 20px; }
+    .dialog-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 16px; }
+    .dialog-tags span { font-size: 12px; background: #342e60; border-radius: 6px; padding: 7px 10px; }
+    .demo-note { max-width: var(--width); margin: auto; padding: 13px 28px 20px; color: #aeb8ca; font-size: 11px; line-height: 1.7; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr 0.85fr; gap: 3px; min-height: 520px; padding: 68px 0; }
+      .orbital { transform: scale(.78); animation: float-small 7s ease-in-out infinite; }
+      .scene { height: 360px; }
+      .float-pill { min-width: 116px; padding: 11px; }.pill-one { right: -12px; }
+      @keyframes float-small { 0%,100% { transform: scale(.78) translateY(7px) rotate(-3deg); } 50% { transform: scale(.78) translateY(-14px) rotate(4deg); } }
+      .project-art { height: 140px; }
+      .project-meta h3 { font-size: 19px; }
+    }
+    @media (max-width: 690px) {
+      .container { padding: 0 18px; }.demo-bar-inner { padding: 13px 18px; }
+      .site-header { padding-top: 15px; }.nav { padding: 11px 13px; min-height: 61px; }
+      .nav-links { display: none; }.nav-contact { font-size: 11px; padding: 10px 12px; }
+      .hero { grid-template-columns: 1fr; padding: 72px 3px 42px; gap: 0; }
+      .hero h1 { font-size: clamp(49px,10vw,68px); }
+      .hero .lede { max-width: 500px; }.scene { height: 336px; margin-top: 13px; }
+      .orbital { animation: float 7s ease-in-out infinite; }
+      .pill-one { right: 5%; top: 30px; }.pill-two { left: 5%; bottom: 10px; }
+      .section { padding-top: 37px; padding-bottom: 57px; }.section-title { display: block; }.section-title p { margin-top: 12px; }
+      .project-grid { grid-template-columns: 1fr; }.project { display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 9px; }
+      .project-art { min-height: 190px; height: 100%; }.project-meta { padding: 10px 6px; }.project-meta p { min-height: 0; }
+      .about-layout { grid-template-columns: 1fr; }.contact { margin-bottom: 38px; }
+    }
+    @media (max-width: 420px) {
+      .hero h1 { font-size: 45px; }.hero-foot { gap: 9px; font-size: 11px; }
+      .orbital { transform: scale(.8); animation: float-small 7s ease-in-out infinite; }
+      .scene { height: 288px; }.float-pill { padding: 9px 11px; min-width: 112px; }.float-pill strong { font-size: 11px; }.float-pill small { font-size: 10px; }
+      .project { display: block; }.project-art { height: 185px; }.project-meta { padding: 15px 8px 9px; }
+      .brand { font-size: 16px; }
+      .control { font-size: 11px; padding: 8px 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .glow { will-change: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Demo controls are not part of the portfolio itself. -->
+  <aside class="demo-bar" aria-label="Interactive demo controls">
+    <div class="demo-bar-inner">
+      <div class="demo-intro">
+        <span class="demo-icon" aria-hidden="true">✳</span>
+        <span><strong>Style Lab · Interactive portfolio</strong><small>Toggle each effect to see what it contributes</small></span>
+      </div>
+      <div class="controls" role="group" aria-label="Visual effect toggles">
+        <button type="button" class="control" data-toggle="aurora" aria-pressed="true"><span class="led" aria-hidden="true"></span>13 · Aurora</button>
+        <button type="button" class="control" data-toggle="glass" aria-pressed="true"><span class="led" aria-hidden="true"></span>03 · Glass</button>
+        <button type="button" class="control" data-toggle="3d" aria-pressed="true"><span class="led" aria-hidden="true"></span>08 · 3D</button>
+        <button type="button" class="reset" id="resetStyles">Reset ↺</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="portfolio" id="portfolio">
+    <div class="ambient" aria-hidden="true">
+      <div class="glow glow-one"></div><div class="glow glow-two"></div><div class="glow glow-three"></div><div class="glow glow-four"></div>
+    </div>
+    <header class="site-header container" id="home">
+      <nav class="nav glass" aria-label="Main navigation">
+        <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">✦</span>alex.dev</a>
+        <div class="nav-links"><a href="#home">Home</a><a href="#work">Work</a><a href="#about">About</a></div>
+        <a class="nav-contact" href="#contact">Let's talk ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero container" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="availability">Open to meaningful collaborations</div>
+          <h1 id="hero-title">Building digital<br><span class="gradient-text">experiences.</span></h1>
+          <p class="lede">Creative developer building thoughtful interfaces, powerful software, and immersive digital experiences.</p>
+          <div class="actions">
+            <a href="#work" class="btn btn-primary">Explore my work <span aria-hidden="true">↗</span></a>
+            <a href="#about" class="btn btn-text">More about me <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-foot"><span>Design × Development × Data</span><span class="line" aria-hidden="true"></span><span>Based on the web</span></div>
+        </div>
+        <div class="scene" aria-label="Decorative illustrated 3D sphere with orbital rings">
+          <div class="scene-halo" aria-hidden="true"></div>
+          <div class="orbital" aria-hidden="true"><div class="ring-back"></div><div class="fine-ring"></div><div class="planet"></div><div class="ring-front"></div><span class="sparkle sp1"></span><span class="sparkle sp2"></span><span class="sparkle sp3"></span></div>
+          <div class="float-pill glass pill-one"><small>Speciality</small><strong>✦ Creative Dev</strong></div>
+          <div class="float-pill glass pill-two"><small>Currently exploring</small><strong>◈ Web & 3D</strong></div>
+          <div class="alt-hero glass"><span class="alt-icon" aria-hidden="true">✳</span><strong>Design with purpose.</strong><p>A clean, accessible fallback when immersive 3D is switched off.</p></div>
+        </div>
+      </section>
+
+      <section class="section container" id="work" aria-labelledby="work-title">
+        <div class="eyebrow">01 / Selected projects</div>
+        <div class="section-title"><h2 id="work-title">Work that connects<br>ideas and impact.</h2><p>A selection of imagined projects illustrating the card system. Replace these with real case studies before publishing.</p></div>
+        <div class="project-grid">
+          <article class="project glass">
+            <div class="project-art art-analytics" aria-hidden="true"><div class="art-glare"></div><div class="mock-window"><div class="mock-dots"><i></i><i></i><i></i></div><div class="mock-stats"><i></i><i></i><i></i></div><div class="mock-chart"><i style="--h:45%"></i><i style="--h:70%"></i><i style="--h:57%"></i><i style="--h:95%"></i><i style="--h:78%"></i></div></div></div>
+            <div class="project-meta"><small>Data / Analytics</small><h3>Insight Platform</h3><p>Turning complex data into interfaces that support better decisions.</p><button type="button" data-project="insight">View concept →</button><div class="tech-list"><span>Angular</span><span>Data visualisation</span></div></div>
+          </article>
+          <article class="project glass">
+            <div class="project-art art-creative" aria-hidden="true"><div class="art-glare"></div><div class="shape-cube"></div></div>
+            <div class="project-meta"><small>Creative / Interactive</small><h3>Orbital Studio</h3><p>A playful product experience built around movement and depth.</p><button type="button" data-project="orbital">View concept →</button><div class="tech-list"><span>Three.js</span><span>WebGL</span></div></div>
+          </article>
+          <article class="project glass">
+            <div class="project-art art-cloud" aria-hidden="true"><div class="art-glare"></div><div class="cloud-network"><svg viewBox="0 0 180 100" role="presentation" aria-hidden="true"><g fill="none" stroke="#aaf8e5" stroke-opacity=".68" stroke-width="2"><path d="M16 75 L79 21 L156 57 L116 89 L16 75 M79 21 L116 89" /></g><g fill="#b5fff0"><circle cx="16" cy="75" r="7"/><circle cx="79" cy="21" r="9"/><circle cx="156" cy="57" r="7"/><circle cx="116" cy="89" r="6"/></g></svg></div></div>
+            <div class="project-meta"><small>Engineering / Cloud</small><h3>Cloud Atlas</h3><p>Reliable cloud architecture presented with human-centred design.</p><button type="button" data-project="cloud">View concept →</button><div class="tech-list"><span>Java</span><span>Cloud</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container" id="about" aria-labelledby="about-title">
+        <div class="eyebrow">02 / About</div>
+        <div class="section-title"><h2 id="about-title">A little more<br>behind the pixels.</h2><p>Here the visual effects step back so professional experience stays easy to read.</p></div>
+        <div class="about-layout">
+          <div class="about-panel glass"><h3>Technology, design,<br><span class="gradient-text">and useful ideas.</span></h3><p>This is sample copy for a developer's portfolio. Replace it with a short, specific account of your background, strengths, and the problems you enjoy solving.</p><p>The goal is to show both your technical depth and how your work benefits people — without letting decorative effects compete with the message.</p></div>
+          <div class="skills-panel glass"><h3>What I bring to the table</h3><div class="skill"><span>Interface engineering</span><span>Angular · TypeScript</span></div><div class="skill"><span>Backend systems</span><span>Java · APIs</span></div><div class="skill"><span>Cloud & data</span><span>Azure · Analytics</span></div><div class="skill"><span>Creative interaction</span><span>CSS · Three.js</span></div></div>
+        </div>
+      </section>
+
+      <section class="container" id="contact" aria-labelledby="contact-title">
+        <div class="contact glass"><div class="eyebrow">03 / Next chapter</div><h2 id="contact-title">Let's create something<br><span class="gradient-text">worth remembering.</span></h2><p>Have an interesting project or just want to say hello? Replace the placeholder email with your own address and make this section yours.</p><a class="btn btn-primary" href="mailto:hello@example.com?subject=Portfolio%20enquiry">Start a conversation ↗</a></div>
+      </section>
+    </main>
+    <footer class="footer container"><span>© <span id="year">2026</span> alex.dev · Portfolio concept</span><span><a href="#home">Back to top ↑</a> &nbsp; · &nbsp; Built with HTML, CSS & JavaScript</span></footer>
+  </div>
+
+  <dialog class="project-dialog" id="projectDialog" aria-labelledby="dialogTitle">
+    <button type="button" class="dialog-close" id="dialogClose" aria-label="Close project details">×</button>
+    <div class="eyebrow" id="dialogType"></div>
+    <h2 id="dialogTitle"></h2>
+    <p id="dialogDescription"></p>
+    <div class="dialog-tags" id="dialogTags"></div>
+  </dialog>
+  <div class="demo-note">Demo notice: “alex.dev”, all projects and “hello@example.com” are placeholders. The orbital illustration is a lightweight CSS approximation of 3D, not an imported WebGL scene. Open this file directly in a modern browser; no installation or external assets required.</div>
+
+  <script>
+    (() => {
+      'use strict';
+      const site = document.getElementById('portfolio');
+      const switches = document.querySelectorAll('[data-toggle]');
+      const setEffect = (name, enabled) => {
+        site.classList.toggle(`no-${name}`, !enabled);
+        const button = document.querySelector(`[data-toggle="${name}"]`);
+        if (button) button.setAttribute('aria-pressed', String(enabled));
+      };
+      switches.forEach(button => button.addEventListener('click', () => {
+        const name = button.dataset.toggle;
+        const enabled = button.getAttribute('aria-pressed') !== 'true';
+        setEffect(name, enabled);
+      }));
+      document.getElementById('resetStyles').addEventListener('click', () => {
+        ['aurora', 'glass', '3d'].forEach(name => setEffect(name, true));
+      });
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+
+      const projects = {
+        insight: {
+          type: 'DATA / ANALYTICS', title: 'Insight Platform',
+          description: 'Illustrative case study: an analytics platform that brings together complex information, clear visualisations and practical workflows. A real portfolio would add the problem, your exact contribution, screenshots and measurable outcomes.',
+          tags: ['Angular', 'TypeScript', 'Data visualisation']
+        },
+        orbital: {
+          type: 'CREATIVE / INTERACTIVE', title: 'Orbital Studio',
+          description: 'Illustrative case study: a creative interactive experience where 3D enhances a product story instead of distracting from navigation or content. A production version could use Three.js and offer a static fallback.',
+          tags: ['Three.js', 'WebGL', 'Interaction design']
+        },
+        cloud: {
+          type: 'ENGINEERING / CLOUD', title: 'Cloud Atlas',
+          description: 'Illustrative case study: a clear visual explanation of a scalable backend and cloud architecture. A real entry should describe decisions, constraints, implementation details and results.',
+          tags: ['Java', 'Cloud', 'Architecture']
+        }
+      };
+      const dialog = document.getElementById('projectDialog');
+      const close = document.getElementById('dialogClose');
+      document.querySelectorAll('[data-project]').forEach(button => button.addEventListener('click', () => {
+        const entry = projects[button.dataset.project];
+        if (!entry) return;
+        document.getElementById('dialogType').textContent = entry.type;
+        document.getElementById('dialogTitle').textContent = entry.title;
+        document.getElementById('dialogDescription').textContent = entry.description;
+        document.getElementById('dialogTags').replaceChildren(...entry.tags.map(tag => {
+          const element = document.createElement('span');
+          element.textContent = tag;
+          return element;
+        }));
+        if (typeof dialog.showModal === 'function') dialog.showModal();
+      }));
+      close.addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', event => {
+        if (event.target === dialog) dialog.close();
+      });
+    })();
+  </script>
+</body>
+</html>

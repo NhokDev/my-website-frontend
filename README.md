@@ -1,7 +1,8 @@
-# My Website
+# Aurora learning portfolio
 
-The Angular application lives in `web/`. Repository-wide documentation, workflow records, and editor
-configuration stay at the root.
+A small, learning-focused portfolio with a static CSS orbital illustration, restrained glass surfaces
+and an Aurora color system. The standalone Angular application lives in `web/`; shared documentation,
+workflow records and editor configuration stay at the root. Rendering remains client-side only.
 
 ## Quick start
 
@@ -9,11 +10,35 @@ Use Node.js 24 and npm 11 (validated with Node.js 24.22.1 and npm 11.8.0). Run t
 repository root:
 
 ```bash
-npm --prefix web install
+npm --prefix web ci
 npm --prefix web start
 ```
 
 Open <http://localhost:4200/>. The application reloads when its source changes.
+
+## Pages and design
+
+| Route          | Content                                                              |
+| -------------- | -------------------------------------------------------------------- |
+| `/`            | Learning-first home, project preview and approach section            |
+| `/projects`    | Honest workbench: this portfolio is in progress; no public demos yet |
+| Any other path | Not-found page with a working home link                              |
+
+The persistent shell lives in `web/src/app/layout/`. Home, Projects and not-found are lazy route
+components; the project card and typed local content belong to Projects and are reused on Home.
+There is no generic UI layer until a real shared component needs one.
+
+Shared tokens and base styles live in `web/src/styles.css`. Tailwind 4 theme colors are primary
+`#A855F7`, secondary `#06B6D4`, tertiary `#10B981` and neutral `#120D1D`. The named
+`--gradient-aurora` preserves the supplied horizontal stops: `#1E1E33 0%`, `#281A43 25%`,
+`#321248 50%`, `#37123C 100%`. Semantic text, surface and focus roles are separate from raw accents.
+Components use Tailwind utilities, including the static decorative artwork, and each owns an external
+HTML template referenced through `templateUrl`. Component generation defaults to external HTML and no
+stylesheet. No animation engine or external fonts are used.
+
+See the user-owned [design reference](docs/portfolio_aurora_glass_3d/PORTFOLIO_DESIGN_BRIEF.md)
+and the [foundation task](odd/tasks/aurora-home-foundation.md) for intent and verification evidence.
+The current user palette takes precedence over older colors and fictional demo content in the reference.
 
 ## Verify the application
 
@@ -56,5 +81,5 @@ starting another session. For tests without a debugger, run `npm --prefix web te
 from the repository root. The **ng serve** browser launcher remains on port 4200.
 
 See the [application guide](web/README.md) for the original Angular CLI instructions and the
-[relocation task](odd/tasks/web-directory-layout.md) for scope and verification evidence. Future
-cross-cutting `docs/` or skills directories belong at the root; neither is currently present.
+[relocation task](odd/tasks/web-directory-layout.md) for the workspace layout history. Cross-cutting
+documentation belongs at the root; `docs/` contains the user-owned design references.
