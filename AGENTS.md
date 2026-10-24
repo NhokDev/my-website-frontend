@@ -56,10 +56,22 @@ do not apply quote overrides or run a repository-wide formatting rewrite.
 - Follow shared configuration: four spaces, no tabs, single quotes where applicable,
   and a Prettier print width of 100. HTML uses the Angular parser.
 - Use LF for text according to `.gitattributes`; retain Windows batch and binary exceptions.
-- Write code, identifiers, UI copy, comments, and documentation in English unless explicitly
+- Write code, identifiers, comments, and documentation in English unless explicitly
   requested otherwise or extending an existing context in another language.
   Conversational persona or tone does not belong in artifacts.
 - Keep Angular and styling configuration inside `web/`; do not introduce root npm tooling.
+
+## Localization
+
+- Every development that adds or changes user-facing text must include both English and
+  Spanish translations through Transloco in the same change.
+- Maintain matching translation keys in `web/public/i18n/en.json` and
+  `web/public/i18n/es.json`, with meaningful, non-empty values in both languages.
+- Use translation keys instead of hardcoded copy in templates and application logic.
+  Include accessibility labels, validation and error messages, page titles, and metadata.
+  Brand names, technology names, and language autonyms may remain unchanged.
+- Verify affected content in both languages and preserve catalog-parity tests. A development
+  with missing translations in either language is incomplete.
 
 ## Scope guardrails
 
