@@ -1,6 +1,8 @@
-<article class="project-card glass grid gap-6 rounded-3xl p-4.5 md:grid-cols-[0.7fr_1fr]">
+<article
+    class="project-card glass grid gap-6 rounded-3xl p-4.5 motion-safe:transition-[translate,border-color,box-shadow] motion-safe:duration-200 md:grid-cols-[0.7fr_1fr] [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-1 [@media(hover:hover)_and_(pointer:fine)]:hover:border-(--border-control)! [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_24px_56px_#120d1d70,inset_0_1px_0_#ffffff20]!"
+>
     <div
-        class="project-visual relative grid min-h-59.5 place-items-center overflow-hidden rounded-[14px] border border-(--border) [background:var(--gradient-aurora)]"
+        class="project-visual relative grid min-h-59.5 place-items-center overflow-hidden rounded-[14px] border border-(--border) [background:var(--gradient-aurora)] before:pointer-events-none before:absolute before:inset-0 before:[background:radial-gradient(ellipse_at_80%_15%,#a855f738,transparent_65%)] before:content-['']"
         aria-hidden="true"
     >
         <div

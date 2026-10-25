@@ -224,6 +224,61 @@ describe('Portfolio routes', () => {
         ]);
     });
 
+    it('pauses and resumes decorative motion with a stable native toggle', async () => {
+        const { fixture, element } = await setup('/');
+        const frame = element.querySelector('.site-frame')!;
+        const toggle = element.querySelector<HTMLButtonElement>('footer button');
+        expect(toggle, 'ongoing motion needs a keyboard-accessible pause control').not.toBeNull();
+        expect(toggle!.type).toBe('button');
+        expect(toggle!.tabIndex).toBe(0);
+        expect(toggle!.textContent?.trim()).toBe('Pause animations');
+        expect(toggle!.getAttribute('aria-pressed')).toBe('false');
+        expect(frame.getAttribute('data-motion')).toBe('running');
+
+        toggle!.click();
+        await fixture.whenStable();
+        expect(toggle!.getAttribute('aria-pressed')).toBe('true');
+        expect(toggle!.textContent?.trim()).toBe('Pause animations');
+        expect(frame.getAttribute('data-motion')).toBe('paused');
+
+        toggle!.click();
+        await fixture.whenStable();
+        expect(toggle!.getAttribute('aria-pressed')).toBe('false');
+        expect(frame.getAttribute('data-motion')).toBe('running');
+        const ambient = element.querySelector('.ambient')!;
+        expect(ambient.getAttribute('aria-hidden')).toBe('true');
+        expect(ambient.querySelectorAll('a, button, [tabindex]')).toHaveLength(0);
+    });
+
+    it('preserves pause across routes and language changes without changing its toggle meaning', async () => {
+        const { fixture, router, element } = await setup('/');
+        const toggle = element.querySelector<HTMLButtonElement>('footer button');
+        expect(toggle).not.toBeNull();
+        toggle!.click();
+        await fixture.whenStable();
+        element.querySelector<HTMLButtonElement>('header button[lang="es"]')!.click();
+        await fixture.whenStable();
+        expect(toggle!.textContent?.trim()).toBe('Pausar animaciones');
+        expect(toggle!.getAttribute('aria-pressed')).toBe('true');
+
+        for (const url of ['/projects', '/unknown', '/']) {
+            await router.navigateByUrl(url);
+            await fixture.whenStable();
+            expect(element.querySelector('footer button')).toBe(toggle);
+            expect(element.querySelector('.site-frame')?.getAttribute('data-motion')).toBe(
+                'paused',
+            );
+        }
+
+        element.querySelector<HTMLButtonElement>('header button[lang="en"]')!.click();
+        await fixture.whenStable();
+        expect(toggle!.textContent?.trim()).toBe('Pause animations');
+        expect(toggle!.getAttribute('aria-pressed')).toBe('true');
+        toggle!.click();
+        await fixture.whenStable();
+        expect(element.querySelector('.site-frame')?.getAttribute('data-motion')).toBe('running');
+    });
+
     it('ignores unsupported language values in the language handler', async () => {
         const { fixture, element } = await setup('/');
         const layout = fixture.debugElement.query(By.directive(PortfolioLayout))

@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { afterNextRender, Component, inject, Injector } from '@angular/core';
+import { afterNextRender, Component, inject, Injector, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
@@ -12,6 +12,7 @@ import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 })
 export class PortfolioLayout {
     protected readonly transloco = inject(TranslocoService);
+    protected readonly motionPaused = signal(false);
 
     private readonly router = inject(Router);
     private readonly document = inject(DOCUMENT);
@@ -40,5 +41,9 @@ export class PortfolioLayout {
 
     protected changeLanguage(lang: string): void {
         if (lang === 'en' || lang === 'es') this.transloco.setActiveLang(lang);
+    }
+
+    protected toggleMotion(): void {
+        this.motionPaused.update((paused) => !paused);
     }
 }

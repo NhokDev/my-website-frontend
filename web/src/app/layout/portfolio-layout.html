@@ -1,5 +1,22 @@
 <a class="skip-link" href="#main-content">{{ 'shell.skip' | transloco }}</a>
-<div class="site-frame flex min-h-dvh flex-col [background:var(--gradient-aurora)]">
+<div
+    class="site-frame relative isolate flex min-h-dvh flex-col bg-(--page-background) [&[data-motion=paused]_.motion-layer]:[animation-play-state:paused]"
+    [attr.data-motion]="motionPaused() ? 'paused' : 'running'"
+>
+    <div
+        class="ambient pointer-events-none absolute inset-0 -z-1 overflow-clip forced-colors:hidden"
+        aria-hidden="true"
+    >
+        <div
+            class="motion-layer absolute -top-56 left-[49%] size-[min(85vw,36rem)] animate-aurora-drift rounded-full [background:radial-gradient(circle,#8744cb66,#8446ad2e_45%,transparent_71%)] motion-reduce:animate-none"
+        ></div>
+        <div
+            class="motion-layer absolute top-40 -left-[min(45vw,20rem)] size-[min(110vw,40rem)] animate-aurora-drift rounded-full [animation-delay:-6s] [background:radial-gradient(circle,#1166b766,#0e518033_42%,transparent_70%)] motion-reduce:animate-none"
+        ></div>
+        <div
+            class="motion-layer absolute top-[43rem] -right-[min(40vw,15rem)] size-[min(90vw,38rem)] animate-aurora-drift rounded-full [animation-delay:-10s] [background:radial-gradient(circle,#19ac9c55,#7655ba33_47%,transparent_71%)] motion-reduce:animate-none"
+        ></div>
+    </div>
     <header class="site-header page-width py-6 [@media(max-width:540px)]:py-4">
         <div
             class="glass nav-bar flex flex-wrap items-center justify-between gap-3 rounded-[18px] px-4.5 py-2.5 [@media(max-width:540px)]:justify-center [@media(max-width:540px)]:gap-0.5 [@media(max-width:540px)]:px-2.5"
@@ -91,6 +108,14 @@
             class="footer-inner mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-(--border) py-7 text-[0.8rem] text-(--text-muted) [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_span]:mx-2"
         >
             <p>Aurora <span aria-hidden="true">/</span> {{ 'shell.portfolio' | transloco }}</p>
+            <button
+                type="button"
+                [attr.aria-pressed]="motionPaused()"
+                (click)="toggleMotion()"
+                class="inline-flex min-h-11 cursor-pointer items-center justify-center rounded-full border border-(--border-control) bg-neutral/50 px-4 text-[0.8rem] hover:bg-(--surface-solid) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--focus) aria-pressed:border-(--focus) aria-pressed:bg-(--surface-solid) aria-pressed:text-(--text)"
+            >
+                {{ 'shell.pauseMotion' | transloco }}
+            </button>
             <a routerLink="/" fragment="approach"
                 >{{ 'shell.curiosity' | transloco }} <span aria-hidden="true">↗</span></a
             >

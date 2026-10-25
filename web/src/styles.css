@@ -5,17 +5,40 @@
     --color-secondary: #06b6d4;
     --color-tertiary: #10b981;
     --color-neutral: #120d1d;
+    --animate-aurora-drift: aurora-drift 17s ease-in-out infinite alternate;
+    --animate-orbital-float: orbital-float 7s ease-in-out infinite;
+
+    @keyframes aurora-drift {
+        from {
+            transform: translate(-24px, -12px) scale(0.97);
+        }
+        to {
+            transform: translate(32px, 24px) scale(1.06);
+        }
+    }
+
+    @keyframes orbital-float {
+        0%,
+        100% {
+            transform: translateY(7px) rotate(-3deg);
+        }
+        50% {
+            transform: translateY(-14px) rotate(4deg);
+        }
+    }
 }
 
 :root {
     color-scheme: dark;
+    --page-background: #090d20;
+    --page-backdrop: #070a14;
     --gradient-aurora: linear-gradient(90deg, #1e1e33 0%, #281a43 25%, #321248 50%, #37123c 100%);
     --text: #f5f0ff;
     --text-muted: #c4bcd4;
     --text-accent: #d6b5ff;
     --text-success: #9be8ce;
     --surface-solid: #21192f;
-    --surface-glass: rgb(18 13 29 / 82%);
+    --surface-glass: rgb(18 13 29 / 76%);
     --border: #61516f;
     --border-control: #9b83b4;
     --focus: #67e8f9;
@@ -24,7 +47,7 @@
 
 body {
     margin: 0;
-    background: var(--color-neutral);
+    background: var(--page-backdrop);
     color: var(--text);
     font-family:
         ui-sans-serif,
@@ -71,8 +94,9 @@ a:hover {
     background: var(--surface-solid);
     border: 1px solid var(--border);
     box-shadow:
-        0 16px 48px #120d1d26,
-        inset 0 1px 0 #ffffff08;
+        0 18px 48px #120d1d50,
+        inset 0 1px 0 #ffffff18,
+        inset 0 -1px 0 #a855f710;
 }
 
 @supports (backdrop-filter: blur(16px)) {

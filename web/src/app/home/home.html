@@ -15,7 +15,8 @@
             class="mt-5 mb-6.5 max-w-165 text-[clamp(2.8rem,5.2vw,4.5rem)] leading-[1.07] font-[750] tracking-[-0.065em] wrap-anywhere [@media(max-width:800px)]:text-[clamp(2.65rem,8vw,4rem)]"
         >
             {{ 'home.headline' | transloco
-            }}<span class="hero-accent text-(--text-accent)"
+            }}<span
+                class="hero-accent text-(--text-accent) supports-[background-clip:text]:bg-[linear-gradient(95deg,var(--text-accent),var(--focus)_60%,var(--text-success))] supports-[background-clip:text]:bg-clip-text supports-[background-clip:text]:text-transparent contrast-more:bg-none! contrast-more:text-(--text)! forced-colors:bg-none! forced-colors:text-[CanvasText]!"
                 >.<br />{{ 'home.headlineAccent' | transloco }}</span
             >
         </h1>
@@ -23,10 +24,15 @@
             {{ 'home.description' | transloco }}
         </p>
         <div class="flex flex-wrap items-center gap-3">
-            <a class="button button-primary" routerLink="/projects"
+            <a
+                class="button button-primary shadow-[0_8px_28px_#a855f730,inset_0_1px_0_#ffffff30] motion-safe:transition-[translate,box-shadow,background-color]! motion-safe:duration-200! [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_12px_32px_#a855f748,inset_0_1px_0_#ffffff30]"
+                routerLink="/projects"
                 >{{ 'home.explore' | transloco }} <span aria-hidden="true">↗</span></a
             >
-            <a class="button button-secondary" routerLink="/" fragment="approach"
+            <a
+                class="button button-secondary shadow-[inset_0_1px_0_#ffffff12] motion-safe:transition-[translate,box-shadow,background-color]! motion-safe:duration-200! [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_10px_24px_#120d1d55,inset_0_1px_0_#ffffff18]"
+                routerLink="/"
+                fragment="approach"
                 >{{ 'home.approachLink' | transloco }} <span aria-hidden="true">↓</span></a
             >
         </div>
