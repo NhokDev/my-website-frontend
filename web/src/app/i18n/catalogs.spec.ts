@@ -28,10 +28,43 @@ describe('Translation catalogs', () => {
             portfolioProject.descriptionKey,
             portfolioProject.statusKey,
             portfolioProject.nextStepKey,
+            'home.about.eyebrow',
+            'home.about.title',
+            'home.about.titleEnd',
+            'home.about.description',
+            'home.about.narrativeTitle',
+            'home.about.narrativeAccent',
+            'home.about.narrative',
+            'home.about.details',
+            'home.about.toolsTitle',
+            'home.about.interface',
+            'home.about.language',
+            'home.about.styling',
+            'home.about.localization',
+            'home.next.eyebrow',
+            'home.next.title',
+            'home.next.titleAccent',
+            'home.next.description',
+            'home.next.cta',
+            'shell.about',
+            'home.aboutLink',
+            'projects.aboutLink',
         ]) {
             expect(english[key]).toBeTruthy();
             expect(spanish[key]).toBeTruthy();
         }
         expect(portfolioProject.technologies).toEqual(['Angular', 'TypeScript', 'Tailwind CSS']);
+        expect(Object.keys(english).some((key) => /approach/i.test(key))).toBe(false);
+    });
+
+    it('keeps private learning context and invented demo credentials out of public copy', () => {
+        for (const catalog of [en, es]) {
+            for (const [key, value] of Object.entries(catalogLeaves(catalog))) {
+                expect(value, key).not.toMatch(
+                    /learn|practi[cs]|aprend|práctic|practicar|no public demos|aún no hay demos|not a record|no un historial|sample copy|placeholder|alex\.dev|hello@example|Three\.js|Azure|\bJava\b/i,
+                );
+                expect(value, key).not.toMatch(/<[^>]+>/);
+            }
+        }
     });
 });

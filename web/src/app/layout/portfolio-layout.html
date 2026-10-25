@@ -1,6 +1,6 @@
 <a class="skip-link" href="#main-content">{{ 'shell.skip' | transloco }}</a>
 <div
-    class="site-frame relative isolate flex min-h-dvh flex-col bg-(--page-background) [&[data-motion=paused]_.motion-layer]:[animation-play-state:paused]"
+    class="site-frame relative isolate flex min-h-dvh flex-col overflow-clip bg-(--page-background) [&[data-motion=paused]_.motion-layer]:[animation-play-state:paused]"
     [attr.data-motion]="motionPaused() ? 'paused' : 'running'"
 >
     <div
@@ -16,10 +16,13 @@
         <div
             class="motion-layer absolute top-[43rem] -right-[min(40vw,15rem)] size-[min(90vw,38rem)] animate-aurora-drift rounded-full [animation-delay:-10s] [background:radial-gradient(circle,#19ac9c55,#7655ba33_47%,transparent_71%)] motion-reduce:animate-none"
         ></div>
-    </div>
-    <header class="site-header page-width py-6 [@media(max-width:540px)]:py-4">
         <div
-            class="glass nav-bar flex flex-wrap items-center justify-between gap-3 rounded-[18px] px-4.5 py-2.5 [@media(max-width:540px)]:justify-center [@media(max-width:540px)]:gap-0.5 [@media(max-width:540px)]:px-2.5"
+            class="absolute top-300 left-[14%] h-112.5 w-[min(90vw,510px)] rounded-full bg-[radial-gradient(circle,#954fd084,transparent_68%)] opacity-85 blur-[78px]"
+        ></div>
+    </div>
+    <header class="site-header page-width pt-6.25 [@media(max-width:690px)]:pt-3.75">
+        <div
+            class="glass nav-bar flex min-h-17.5 flex-wrap items-center justify-between gap-3 rounded-[18px] px-5.25 py-3.25 [@media(max-width:690px)]:px-3.25 [@media(max-width:690px)]:py-2.75 [@media(max-width:540px)]:justify-center [@media(max-width:540px)]:gap-0.5"
         >
             <a
                 class="brand inline-flex min-h-11 items-center gap-2 text-[1.3rem] font-[750] tracking-[-0.055em] [@media(max-width:540px)]:w-full [@media(max-width:540px)]:justify-center"
@@ -27,7 +30,7 @@
                 [attr.aria-label]="'shell.homeLabel' | transloco"
             >
                 <span
-                    class="brand-mark grid size-8.5 place-items-center rounded-[10px] bg-primary text-[1.5rem] text-(--on-primary)"
+                    class="brand-mark grid size-8.5 place-items-center rounded-[11px] bg-[linear-gradient(125deg,#d8d2ff,#8f77f6)] text-[19px] text-[#1a1642] shadow-[0_0_23px_#af82f959]"
                     aria-hidden="true"
                     >✳</span
                 >
@@ -47,8 +50,8 @@
                 <a routerLink="/projects" routerLinkActive="current" ariaCurrentWhenActive="page">{{
                     'shell.projects' | transloco
                 }}</a>
-                <a routerLink="/" fragment="approach"
-                    >{{ 'shell.approach' | transloco }} <span aria-hidden="true">↗</span></a
+                <a routerLink="/" fragment="about"
+                    >{{ 'shell.about' | transloco }} <span aria-hidden="true">↗</span></a
                 >
             </nav>
             <div
@@ -116,7 +119,7 @@
             >
                 {{ 'shell.pauseMotion' | transloco }}
             </button>
-            <a routerLink="/" fragment="approach"
+            <a routerLink="/" fragment="next-chapter"
                 >{{ 'shell.curiosity' | transloco }} <span aria-hidden="true">↗</span></a
             >
         </div>

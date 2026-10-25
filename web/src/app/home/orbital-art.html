@@ -1,24 +1,24 @@
 <div
-    class="scene relative isolate grid h-107.5 place-items-center [@media(max-width:800px)]:mx-auto [@media(max-width:800px)]:mt-5.5 [@media(max-width:800px)]:mb-2.5 [@media(380px<width<=800px)]:h-85 [@media(max-width:800px)]:max-w-107.5 [@media(max-width:380px)]:h-77.5 forced-colors:invisible"
+    class="scene relative isolate grid h-102.5 place-items-center [@media(690px<width<=900px)]:h-90 [@media(max-width:690px)]:mt-3.25 [@media(420px<width<=690px)]:h-84 [@media(max-width:420px)]:h-72 forced-colors:invisible"
 >
     <div
-        class="halo absolute inset-0 -z-1 [background:radial-gradient(ellipse_at_60%_40%,#a855f738,transparent_65%),radial-gradient(ellipse_at_20%_70%,#06b6d422,transparent_60%)] mask-[radial-gradient(ellipse_at_center,#000_25%,transparent_70%)]"
+        class="halo absolute -z-1 size-77.5 rounded-full bg-[#7a57ed78] opacity-70 blur-[78px]"
     ></div>
     <div class="orbital-float motion-layer animate-orbital-float motion-reduce:animate-none">
         <div
-            class="orbit relative size-[350px] perspective-[850px] [@media(max-width:800px)]:transform-[scale(0.8)] [@media(max-width:380px)]:size-[290px]"
+            class="orbit relative size-[330px] perspective-[900px] [@media(690px<width<=900px)]:scale-[0.78] [@media(max-width:420px)]:scale-[0.8]"
         >
             <div
-                class="ring-back absolute -inset-x-1 inset-y-23.75 rounded-[50%] border-11 border-[#c8b9f5] opacity-[0.45] [box-shadow:0_0_18px_#a855f744,inset_0_0_12px_#f4edff44] transform-[rotate(-28deg)_rotateX(57deg)]"
+                class="ring-back absolute -inset-x-1.25 inset-y-26.25 rounded-full border-12 border-[#bfbeff] opacity-60 brightness-60 [box-shadow:0_0_18px_#8780fc6a,inset_0_0_19px_#fff5] transform-[rotate(-27deg)_rotateX(58deg)]"
             ></div>
             <div
-                class="planet absolute inset-14.75 rounded-[50%] [background:radial-gradient(ellipse_at_30%_23%,#e9e1ff,#b99af7_22%,var(--color-primary)_40%,#573085_65%,#160e2d_88%)] [box-shadow:inset_-18px_-20px_30px_#120d1d99,inset_8px_8px_20px_#ede4ff55,0_0_50px_#a855f726] transform-[rotate(-23deg)] after:absolute after:inset-[10%] after:rounded-[inherit] after:[background:repeating-radial-gradient(ellipse_at_60%_70%,transparent_0_16px,#e9e1ff18_17px_18px)] after:content-['']"
+                class="planet absolute inset-12.25 rounded-full [background:radial-gradient(ellipse_at_28%_19%,#e2fcff_0%,#bbcaff_11%,#b593f3_26%,#7053d0_44%,#2c2f8f_67%,#0b1049_91%)] [box-shadow:inset_-20px_-28px_42px_#0b0c4fc7,inset_8px_12px_24px_#f0ccff9c,0_0_60px_#765bea59] transform-[rotate(-21deg)] after:absolute after:inset-[8%] after:rounded-[inherit] after:[background:repeating-radial-gradient(ellipse_at_60%_73%,transparent_0_18px,#c1d9ff17_19px_20px)] after:mix-blend-screen after:content-['']"
             ></div>
             <div
-                class="ring-front absolute -inset-x-1 inset-y-23.75 rounded-[50%] border-11 border-[#c8b9f5] [box-shadow:0_0_18px_#a855f744,inset_0_0_12px_#f4edff44] [clip-path:polygon(0_48%,100%_48%,100%_100%,0_100%)] transform-[rotate(-28deg)_rotateX(57deg)]"
+                class="ring-front absolute -inset-x-1.25 inset-y-26.25 rounded-full border-12 border-[#b7bdff] drop-shadow-[0_4px_4px_#252262] [box-shadow:0_0_18px_#8780fc6a,inset_0_0_19px_#fff5] [clip-path:polygon(0_48%,100%_48%,100%_100%,0_100%)] transform-[rotate(-27deg)_rotateX(58deg)]"
             ></div>
             <div
-                class="fine-ring absolute inset-x-5 inset-y-8.75 rounded-[50%] border border-secondary opacity-70 transform-[rotate(42deg)_rotateX(62deg)]"
+                class="fine-ring absolute inset-x-6 inset-y-12 rounded-full border-2 border-[#cbf8ff7a] transform-[rotate(49deg)_rotateX(67deg)]"
             ></div>
             <span
                 class="spark spark-one absolute top-9.5 right-18.5 size-1.5 rounded-[50%] bg-[#b4f4ef] [box-shadow:0_0_16px_var(--color-secondary)]"
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div
-        class="annotation glass absolute top-4 right-0 rounded-[14px] px-4.5 py-3.5 transform-[rotate(4deg)] [@media(max-width:800px)]:top-2 [@media(max-width:800px)]:right-1.25"
+        class="annotation glass absolute top-15 right-0 min-w-36.5 rounded-2xl px-4.25 py-3.25 transform-[rotate(5deg)] [@media(690px<width<=1140px)]:right-3 [@media(max-width:900px)]:min-w-29 [@media(max-width:900px)]:p-2.75 [@media(max-width:690px)]:top-7.5 [@media(max-width:690px)]:right-[5%] [@media(max-width:420px)]:px-2.75 [@media(max-width:420px)]:py-2.25"
     >
         <span class="mb-1.25 block text-[0.7rem] text-(--text-muted)">{{
             'home.orbit.mindset' | transloco
@@ -39,7 +39,7 @@
         }}</strong>
     </div>
     <div
-        class="annotation annotation-bottom glass absolute bottom-2.5 left-0 rounded-[14px] px-4.5 py-3.5 transform-[rotate(-4deg)] [@media(max-width:800px)]:bottom-0 [@media(max-width:800px)]:left-1.25"
+        class="annotation annotation-bottom glass absolute bottom-8.5 -left-[2%] min-w-36.5 rounded-2xl px-4.25 py-3.25 transform-[rotate(-5deg)] [@media(max-width:900px)]:min-w-29 [@media(max-width:900px)]:p-2.75 [@media(max-width:690px)]:bottom-2.5 [@media(max-width:690px)]:left-[5%] [@media(max-width:420px)]:px-2.75 [@media(max-width:420px)]:py-2.25"
     >
         <span class="mb-1.25 block text-[0.7rem] text-(--text-muted)">{{
             'home.orbit.process' | transloco

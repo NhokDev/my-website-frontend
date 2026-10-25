@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 
 @theme static {
-    --color-primary: #a855f7;
-    --color-secondary: #06b6d4;
-    --color-tertiary: #10b981;
+    --color-primary: #865ef2;
+    --color-secondary: #50c9fa;
+    --color-tertiary: #9debd6;
     --color-neutral: #120d1d;
     --animate-aurora-drift: aurora-drift 17s ease-in-out infinite alternate;
     --animate-orbital-float: orbital-float 7s ease-in-out infinite;
@@ -33,12 +33,13 @@
     --page-background: #090d20;
     --page-backdrop: #070a14;
     --gradient-aurora: linear-gradient(90deg, #1e1e33 0%, #281a43 25%, #321248 50%, #37123c 100%);
-    --text: #f5f0ff;
-    --text-muted: #c4bcd4;
-    --text-accent: #d6b5ff;
+    --text: #f5f7ff;
+    --text-muted: #aeb7d4;
+    --text-accent: #b7a8ff;
     --text-success: #9be8ce;
     --surface-solid: #21192f;
-    --surface-glass: rgb(18 13 29 / 76%);
+    --surface-glass: rgb(255 255 255 / 7.5%);
+    --border-glass: rgb(255 255 255 / 18%);
     --border: #61516f;
     --border-control: #9b83b4;
     --focus: #67e8f9;
@@ -50,8 +51,8 @@ body {
     background: var(--page-backdrop);
     color: var(--text);
     font-family:
+        Inter,
         ui-sans-serif,
-        system-ui,
         -apple-system,
         BlinkMacSystemFont,
         'Segoe UI',
@@ -86,23 +87,38 @@ a:hover {
 }
 
 .page-width {
-    width: min(100% - 48px, 1160px);
+    width: 100%;
+    max-width: 1140px;
+    padding-inline: 28px;
     margin-inline: auto;
+}
+
+.gradient-text {
+    display: inline-block;
+    color: #cfb9ff;
+}
+
+@supports (background-clip: text) {
+    .gradient-text {
+        background: linear-gradient(95deg, #cfb9ff, #91dffc 60%, #b0f4df);
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .glass {
     background: var(--surface-solid);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-glass);
     box-shadow:
-        0 18px 48px #120d1d50,
-        inset 0 1px 0 #ffffff18,
-        inset 0 -1px 0 #a855f710;
+        0 16px 48px #01030e34,
+        inset 0 1px 0 #ffffff12;
 }
 
-@supports (backdrop-filter: blur(16px)) {
+@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
     .glass {
         background: var(--surface-glass);
-        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
     }
 }
 
@@ -124,50 +140,66 @@ a:hover {
 
 .eyebrow {
     color: var(--text-accent);
-    font-size: 0.7rem;
-    font-weight: 650;
-    letter-spacing: 0.15em;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    margin-bottom: 13px;
+    line-height: normal;
 }
 
 h2 {
-    margin-top: 12px;
-    font-size: clamp(1.65rem, 3vw, 2.25rem);
-    font-weight: 650;
-    line-height: 1.2;
-    letter-spacing: -0.045em;
+    margin: 0;
+    font-size: clamp(27px, 3vw, 40px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.05em;
 }
 
 .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    min-height: 48px;
-    padding: 12px 18px;
-    border: 1px solid var(--border-control);
-    border-radius: 11px;
-    font-size: 0.85rem;
-    font-weight: 650;
-    transition: background-color 160ms ease;
+    gap: 8px;
+    min-height: 45px;
+    padding: 12px 19px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 750;
+    line-height: normal;
+    transition:
+        translate 200ms,
+        background 200ms,
+        box-shadow 200ms;
 }
 
 .button-primary {
-    color: var(--on-primary);
-    background: var(--color-primary);
-    border-color: var(--color-primary);
+    color: #252044;
+    background: #f0edff;
+    box-shadow: 0 8px 30px #b5a1ff26;
 }
 
 .button-primary:hover {
-    background: var(--text-accent);
+    background: #fff;
 }
 
 .button-secondary {
-    background: var(--surface-solid);
+    color: #dde1fb;
+    background: transparent;
 }
 
 .button-secondary:hover {
-    background: var(--color-neutral);
+    background: #ffffff16;
+}
+
+.button:hover {
+    text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .button:hover {
+        translate: 0 -2px;
+    }
 }
 
 .text-link {
@@ -198,9 +230,9 @@ h2 {
     line-height: 1.8;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 690px) {
     .page-width {
-        width: calc(100% - 32px);
+        padding-inline: 18px;
     }
 
     .route-page {
@@ -214,7 +246,32 @@ h2 {
     }
 }
 
+@media (prefers-contrast: more), (forced-colors: active) {
+    .gradient-text {
+        background: none;
+        color: var(--text);
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .glass {
+        background: var(--surface-solid);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
 @media (forced-colors: active) {
+    .gradient-text {
+        color: CanvasText;
+    }
+    .glass {
+        background: Canvas;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        box-shadow: none;
+    }
+
     .glass,
     .button,
     .brand-mark {

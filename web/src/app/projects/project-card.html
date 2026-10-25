@@ -1,12 +1,12 @@
 <article
-    class="project-card glass grid gap-6 rounded-3xl p-4.5 motion-safe:transition-[translate,border-color,box-shadow] motion-safe:duration-200 md:grid-cols-[0.7fr_1fr] [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-1 [@media(hover:hover)_and_(pointer:fine)]:hover:border-(--border-control)! [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_24px_56px_#120d1d70,inset_0_1px_0_#ffffff20]!"
+    class="project-card glass grid gap-4.5 rounded-[22px] p-3.25 motion-safe:transition-[translate,border-color] motion-safe:duration-200 md:grid-cols-[0.7fr_1fr] [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-1.25 [@media(hover:hover)_and_(pointer:fine)]:hover:border-[#ffffff60]!"
 >
     <div
-        class="project-visual relative grid min-h-59.5 place-items-center overflow-hidden rounded-[14px] border border-(--border) [background:var(--gradient-aurora)] before:pointer-events-none before:absolute before:inset-0 before:[background:radial-gradient(ellipse_at_80%_15%,#a855f738,transparent_65%)] before:content-['']"
+        class="project-visual relative grid min-h-59.5 place-items-center overflow-hidden rounded-[14px] [background:radial-gradient(circle_at_10%_15%,#4b79b0,#222b77_52%,#18184c)] before:pointer-events-none before:absolute before:-right-5 before:-bottom-8.75 before:size-36.25 before:rounded-full before:bg-[#a978ea70] before:blur-[35px] before:content-['']"
         aria-hidden="true"
     >
         <div
-            class="visual-window w-[76%] max-w-72.5 rounded-[10px] border border-[#cdb6ef77] bg-(--surface-solid) p-3.5 [box-shadow:0_15px_40px_#120d1d88] transform-[rotate(-5deg)_translateY(-5px)]"
+            class="visual-window glass w-[76%] max-w-72.5 rounded-[10px] p-3.5 transform-[rotate(-5deg)_translateY(-5px)]"
         >
             <div
                 class="window-bar flex items-center gap-1.25 *:size-1 *:rounded-[50%] *:bg-(--text-accent)"
@@ -44,7 +44,7 @@
             {{ project().descriptionKey | transloco }}
         </p>
         <ul
-            class="my-4.5 flex list-none flex-wrap gap-2 p-0 *:rounded-[7px] *:border *:border-(--border) *:px-2.5 *:py-1.25 *:text-[0.7rem] *:text-(--text-muted)"
+            class="my-3.5 flex list-none flex-wrap gap-1.75 p-0 *:rounded-md *:border *:border-[#ffffff19] *:bg-[#ffffff13] *:px-2 *:py-1.25 *:text-[10px] *:leading-[normal] *:text-[#d3d5ee]"
             [attr.aria-label]="'project.technologies' | transloco"
         >
             @for (technology of project().technologies; track technology) {

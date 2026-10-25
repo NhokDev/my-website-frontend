@@ -5,7 +5,7 @@
             "projects": "Proyectos · Aurora",
             "notFound": "Página no encontrada · Aurora"
         },
-        "description": "Un portafolio de aprendizaje: explorar interfaces cuidadas, construir con intención y compartir el trabajo en desarrollo."
+        "description": "Interfaces cuidadas, diseño con propósito y experiencias digitales. Descubre el portafolio Aurora y sus proyectos."
     },
     "shell": {
         "skip": "Saltar al contenido",
@@ -13,58 +13,68 @@
         "navigation": "Navegación principal",
         "home": "Inicio",
         "projects": "Proyectos",
-        "approach": "Enfoque",
+        "about": "Acerca de",
         "language": "Idioma",
-        "portfolio": "Un portafolio de aprendizaje",
-        "curiosity": "Hecho con curiosidad",
+        "portfolio": "Portafolio digital",
+        "curiosity": "Próximo capítulo",
         "pauseMotion": "Pausar animaciones"
     },
     "home": {
-        "eyebrow": "Un espacio para crecer",
-        "headline": "Aprender construyendo",
-        "headlineAccent": "Una idea a la vez.",
-        "description": "Explorar el oficio del software mediante interfaces cuidadas y pasos pequeños y deliberados. Aquí es donde ese camino toma forma.",
-        "explore": "Explorar el taller",
-        "approachLink": "El enfoque",
-        "note": "Primero, la curiosidad. Progreso antes que perfección.",
-        "workEyebrow": "En el taller",
-        "workTitle": "Un comienzo, no una colección de éxitos.",
-        "workLink": "Ver el taller",
+        "eyebrow": "Diseño con propósito",
+        "headline": "Creando experiencias",
+        "headlineAccent": "digitales.",
+        "description": "Interfaces cuidadas, software con propósito y experiencias digitales que dan vida a las ideas.",
+        "explore": "Explorar mis proyectos",
+        "aboutLink": "Detrás de los píxeles",
+        "note": "Diseño × Desarrollo × Interacción",
+        "workEyebrow": "01 / Proyectos seleccionados",
+        "workTitle": "De las ideas a las interfaces.",
+        "workLink": "Ver proyectos",
         "orbit": {
-            "mindset": "La mentalidad",
-            "exploring": "Siempre explorando.",
-            "process": "El proceso",
-            "repeat": "Aprender. Crear. Repetir."
+            "mindset": "Interfaz",
+            "exploring": "Diseño con propósito.",
+            "process": "Creado con",
+            "repeat": "Angular · TypeScript"
         },
-        "approach": {
-            "eyebrow": "Cómo quiero construir",
-            "title": "Entenderlo.",
-            "titleEnd": "Crearlo. Mejorarlo.",
-            "description": "Un portafolio puede ser un lugar para practicar, no solo para presentar. El objetivo aquí es aprender de forma abierta y dejar que el trabajo crezca junto con la comprensión.",
-            "whyTitle": "Empieza por el porqué",
-            "whyDescription": "Entender el problema antes de recurrir a una herramienta.",
-            "buildTitle": "Construye con intención",
-            "buildDescription": "Mantener las interfaces claras, accesibles y útiles.",
-            "reflectTitle": "Reflexiona y mejora",
-            "reflectDescription": "Poner a prueba las ideas, detectar las carencias y dar el siguiente paso."
+        "about": {
+            "eyebrow": "02 / Acerca de",
+            "title": "Un poco más",
+            "titleEnd": "detrás de los píxeles.",
+            "description": "Interfaces claras, detalles cuidados y tecnología al servicio de las ideas.",
+            "narrativeTitle": "Tecnología, diseño,",
+            "narrativeAccent": "e ideas útiles.",
+            "narrative": "Aurora combina interfaces adaptables, navegación accesible y una identidad visual definida por la luz, la profundidad y el movimiento.",
+            "details": "Cada detalle conecta con los demás: contenido claro, interacciones con propósito y una experiencia natural en español e inglés.",
+            "toolsTitle": "Herramientas y tecnologías",
+            "interface": "Interfaz",
+            "language": "Lenguaje",
+            "styling": "Estilos",
+            "localization": "Localización"
+        },
+        "next": {
+            "eyebrow": "03 / Próximo capítulo",
+            "title": "Creemos algo",
+            "titleAccent": "que deje huella.",
+            "description": "Descubre las ideas, los detalles de diseño y la tecnología detrás de los proyectos. El próximo capítulo comienza con una mirada más cercana.",
+            "cta": "Explorar mis proyectos"
         }
     },
     "projects": {
-        "eyebrow": "El taller",
-        "title": "Pasos pequeños. Aprendizaje real.",
-        "description": "Aún no hay demos públicas. Este es un espacio para el trabajo en desarrollo, empezando por el propio portafolio.",
-        "current": "Tomando forma",
-        "approachLink": "Explorar el enfoque"
+        "eyebrow": "Proyectos seleccionados",
+        "title": "De las ideas a las interfaces.",
+        "description": "Interfaces adaptables, arquitectura cuidada y diseño con propósito, empezando por Aurora.",
+        "current": "Proyecto destacado",
+        "aboutLink": "Detrás de los píxeles"
     },
     "project": {
-        "caption": "Una idea que toma forma",
-        "category": "Proyecto de aprendizaje",
+        "caption": "Diseño × Desarrollo",
+        "category": "Interfaz / Interactivo",
         "technologies": "Tecnologías",
         "status": { "inProgress": "En desarrollo" },
         "portfolio": {
             "title": "Portafolio Aurora",
-            "description": "Este mismo sitio: un proyecto de aprendizaje para transformar una idea en una interfaz clara y accesible.",
-            "nextStep": "Siguiente paso: ampliar el contenido a medida que los proyectos reales tomen forma."
+            "description": "Este mismo sitio: un portafolio adaptable y bilingüe con navegación accesible, superficies de cristal compartidas y una ilustración orbital en CSS.",
+            "nextStep": "Siguiente paso: una página Acerca de y una experiencia de contacto."
         }
     },
     "notFound": {

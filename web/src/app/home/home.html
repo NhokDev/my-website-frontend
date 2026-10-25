@@ -1,5 +1,5 @@
 <section
-    class="hero grid min-h-147.5 grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] items-center gap-8 pt-14.5 pb-20 [@media(max-width:800px)]:grid-cols-1 [@media(max-width:800px)]:gap-2.5 [@media(max-width:800px)]:pt-10 [@media(max-width:800px)]:pb-8"
+    class="hero -mx-4 grid min-h-147.5 grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] items-center gap-6.5 pt-22.5 pb-19.5 [@media(max-width:900px)]:mx-0 [@media(max-width:900px)]:min-h-130 [@media(690px<width<=900px)]:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] [@media(690px<width<=900px)]:gap-0.75 [@media(690px<width<=900px)]:py-17 [@media(max-width:690px)]:grid-cols-1 [@media(max-width:690px)]:gap-0 [@media(max-width:690px)]:px-0.75 [@media(max-width:690px)]:pt-18 [@media(max-width:690px)]:pb-10.5"
     aria-labelledby="home-title"
 >
     <div class="hero-copy relative z-1">
@@ -12,38 +12,35 @@
         </p>
         <h1
             id="home-title"
-            class="mt-5 mb-6.5 max-w-165 text-[clamp(2.8rem,5.2vw,4.5rem)] leading-[1.07] font-[750] tracking-[-0.065em] wrap-anywhere [@media(max-width:800px)]:text-[clamp(2.65rem,8vw,4rem)]"
+            class="m-0 text-[clamp(48px,6.4vw,79px)] leading-[1.05] font-[780] tracking-[-0.065em] wrap-anywhere [@media(max-width:690px)]:text-[clamp(49px,10vw,68px)] [@media(max-width:420px)]:text-[45px]!"
         >
-            {{ 'home.headline' | transloco
-            }}<span
-                class="hero-accent text-(--text-accent) supports-[background-clip:text]:bg-[linear-gradient(95deg,var(--text-accent),var(--focus)_60%,var(--text-success))] supports-[background-clip:text]:bg-clip-text supports-[background-clip:text]:text-transparent contrast-more:bg-none! contrast-more:text-(--text)! forced-colors:bg-none! forced-colors:text-[CanvasText]!"
-                >.<br />{{ 'home.headlineAccent' | transloco }}</span
-            >
+            {{ 'home.headline' | transloco }}<br />
+            <span class="hero-accent gradient-text">{{ 'home.headlineAccent' | transloco }}</span>
         </h1>
-        <p class="hero-description mb-7 max-w-112.5 text-base leading-[1.85] text-(--text-muted)">
+        <p
+            class="hero-description mt-6.25 mb-7.5 max-w-116.25 text-[clamp(14px,1.4vw,16px)] leading-[1.8] text-[#bbc3dc]"
+        >
             {{ 'home.description' | transloco }}
         </p>
-        <div class="flex flex-wrap items-center gap-3">
-            <a
-                class="button button-primary shadow-[0_8px_28px_#a855f730,inset_0_1px_0_#ffffff30] motion-safe:transition-[translate,box-shadow,background-color]! motion-safe:duration-200! [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_12px_32px_#a855f748,inset_0_1px_0_#ffffff30]"
-                routerLink="/projects"
+        <div class="flex flex-wrap items-center gap-3.25">
+            <a class="button button-primary" routerLink="/projects"
                 >{{ 'home.explore' | transloco }} <span aria-hidden="true">↗</span></a
             >
-            <a
-                class="button button-secondary shadow-[inset_0_1px_0_#ffffff12] motion-safe:transition-[translate,box-shadow,background-color]! motion-safe:duration-200! [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_10px_24px_#120d1d55,inset_0_1px_0_#ffffff18]"
-                routerLink="/"
-                fragment="approach"
-                >{{ 'home.approachLink' | transloco }} <span aria-hidden="true">↓</span></a
+            <a class="button button-secondary" routerLink="/" fragment="about"
+                >{{ 'home.aboutLink' | transloco }} <span aria-hidden="true">↓</span></a
             >
         </div>
-        <p class="hero-note mt-6.5 text-[0.8rem] text-(--text-muted)">
+        <p class="hero-note mt-8.25 text-xs text-(--text-muted)">
             {{ 'home.note' | transloco }}
         </p>
     </div>
     <app-orbital-art />
 </section>
 
-<section class="work-section pt-4 pb-17" aria-labelledby="work-title">
+<section
+    class="work-section pt-9.75 pb-19 [@media(max-width:690px)]:pt-9.25 [@media(max-width:690px)]:pb-14.25"
+    aria-labelledby="work-title"
+>
     <div class="section-heading mb-6.5 flex flex-wrap items-end justify-between gap-4">
         <div>
             <p class="eyebrow">{{ 'home.workEyebrow' | transloco }}</p>
@@ -57,43 +54,85 @@
 </section>
 
 <section
-    id="approach"
-    class="approach-section grid scroll-mt-8 gap-6 border-t border-(--border) pt-11 md:grid-cols-2"
+    id="about"
+    class="about-section scroll-mt-5 pt-9.75 pb-19 [@media(max-width:690px)]:pt-9.25 [@media(max-width:690px)]:pb-14.25"
     tabindex="-1"
-    aria-labelledby="approach-title"
+    aria-labelledby="about-title"
 >
-    <div>
-        <p class="eyebrow">{{ 'home.approach.eyebrow' | transloco }}</p>
-        <h2 id="approach-title">
-            {{ 'home.approach.title' | transloco }}<br />{{ 'home.approach.titleEnd' | transloco }}
+    <p class="eyebrow">{{ 'home.about.eyebrow' | transloco }}</p>
+    <div class="mb-6.25 flex items-end justify-between gap-4.5 [@media(max-width:690px)]:block">
+        <h2 id="about-title">
+            {{ 'home.about.title' | transloco }}<br />{{ 'home.about.titleEnd' | transloco }}
         </h2>
-        <p class="section-description mt-5.5 max-w-112.5 leading-[1.8] text-(--text-muted)">
-            {{ 'home.approach.description' | transloco }}
+        <p
+            class="max-w-85 text-[13px] leading-[1.65] text-[#aeb7d1] [@media(max-width:690px)]:mt-3"
+        >
+            {{ 'home.about.description' | transloco }}
         </p>
     </div>
-    <ol
-        class="approach-list m-0 list-none p-0 [&_h3]:mb-1.5 [&_h3]:font-[650] [&_li]:flex [&_li]:gap-5.5 [&_li]:border-b [&_li]:border-b-(--border) [&_li]:py-5.5 [&_li:first-child]:pt-0 [&_p]:text-[0.9rem] [&_p]:leading-[1.7] [&_p]:text-(--text-muted) [&_span]:pt-0.75 [&_span]:font-[ui-monospace,monospace] [&_span]:text-[0.8rem] [&_span]:text-(--text-accent)"
+    <div
+        class="about-layout grid grid-cols-[1.1fr_0.9fr] gap-4.5 [@media(max-width:690px)]:grid-cols-1"
     >
-        <li>
-            <span aria-hidden="true">01</span>
-            <div>
-                <h3>{{ 'home.approach.whyTitle' | transloco }}</h3>
-                <p>{{ 'home.approach.whyDescription' | transloco }}</p>
-            </div>
-        </li>
-        <li>
-            <span aria-hidden="true">02</span>
-            <div>
-                <h3>{{ 'home.approach.buildTitle' | transloco }}</h3>
-                <p>{{ 'home.approach.buildDescription' | transloco }}</p>
-            </div>
-        </li>
-        <li>
-            <span aria-hidden="true">03</span>
-            <div>
-                <h3>{{ 'home.approach.reflectTitle' | transloco }}</h3>
-                <p>{{ 'home.approach.reflectDescription' | transloco }}</p>
-            </div>
-        </li>
-    </ol>
+        <div class="about-panel glass min-w-0 rounded-[22px] p-[clamp(23px,4vw,42px)]">
+            <h3
+                class="mb-4.75 text-[clamp(24px,2.6vw,35px)] leading-[1.2] font-bold tracking-[-0.04em]"
+            >
+                {{ 'home.about.narrativeTitle' | transloco }}<br />
+                <span class="gradient-text">{{ 'home.about.narrativeAccent' | transloco }}</span>
+            </h3>
+            <p class="mb-3.5 text-sm leading-[1.9] text-[#c0c7df]">
+                {{ 'home.about.narrative' | transloco }}
+            </p>
+            <p class="text-sm leading-[1.9] text-[#c0c7df]">
+                {{ 'home.about.details' | transloco }}
+            </p>
+        </div>
+        <div class="skills-panel glass min-w-0 rounded-[22px] p-[clamp(23px,4vw,42px)]">
+            <h3 class="mb-5.75 text-lg font-bold leading-[normal]">
+                {{ 'home.about.toolsTitle' | transloco }}
+            </h3>
+            <dl
+                class="text-[13px] leading-[normal] text-[#ebecff] [&>div]:flex [&>div]:flex-wrap [&>div]:justify-between [&>div]:gap-x-3.5 [&>div]:gap-y-1 [&>div]:border-b [&>div]:border-[#ffffff24] [&>div]:py-4 [&>div:first-child]:pt-0 [&>div:last-child]:border-0 [&>div:last-child]:pb-0 [&_dd]:text-right [&_dd]:text-[#adb9d8]"
+            >
+                <div>
+                    <dt>{{ 'home.about.interface' | transloco }}</dt>
+                    <dd>Angular</dd>
+                </div>
+                <div>
+                    <dt>{{ 'home.about.language' | transloco }}</dt>
+                    <dd>TypeScript</dd>
+                </div>
+                <div>
+                    <dt>{{ 'home.about.styling' | transloco }}</dt>
+                    <dd>Tailwind CSS</dd>
+                </div>
+                <div>
+                    <dt>{{ 'home.about.localization' | transloco }}</dt>
+                    <dd>Transloco</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</section>
+
+<section
+    id="next-chapter"
+    class="glass relative mt-3 mb-17.5 scroll-mt-5 overflow-hidden rounded-[28px] p-[clamp(28px,5vw,58px)] text-center before:pointer-events-none before:absolute before:inset-x-[14%] before:-bottom-41.25 before:h-62.5 before:rounded-[50%] before:bg-[#6867ec4b] before:blur-[60px] before:content-[''] *:relative [@media(max-width:690px)]:mb-9.5"
+    tabindex="-1"
+    aria-labelledby="next-chapter-title"
+>
+    <p class="eyebrow">{{ 'home.next.eyebrow' | transloco }}</p>
+    <h2
+        id="next-chapter-title"
+        class="mt-2! mb-4! text-[clamp(35px,5vw,59px)]! leading-[1.1]! tracking-[-0.06em]!"
+    >
+        {{ 'home.next.title' | transloco }}<br />
+        <span class="gradient-text">{{ 'home.next.titleAccent' | transloco }}</span>
+    </h2>
+    <p class="mx-auto mb-6 max-w-130 text-sm leading-[1.7] text-[#bac5df]">
+        {{ 'home.next.description' | transloco }}
+    </p>
+    <a class="button button-primary" routerLink="/projects">
+        {{ 'home.next.cta' | transloco }} <span aria-hidden="true">↗</span>
+    </a>
 </section>

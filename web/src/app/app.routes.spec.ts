@@ -37,26 +37,106 @@ describe('Portfolio routes', () => {
         expect(element.querySelector('header')).toBe(header);
         expect(element.querySelector('main')).toBe(main);
         expect(element.querySelectorAll('h1')).toHaveLength(1);
-        expect(element.querySelector('h1')?.textContent).toBe('Small steps. Real learning.');
+        expect(element.querySelector('h1')?.textContent).toBe('Ideas into interfaces.');
         expect(TestBed.inject(Title).getTitle()).toBe('Projects · Aurora');
         expect(projectsLink.getAttribute('aria-current')).toBe('page');
         expect(element.querySelector('nav a[href="/"]')?.hasAttribute('aria-current')).toBe(false);
         expect(document.activeElement).toBe(main);
-        expect(element.textContent).toContain('No public demos yet.');
+        expect(element.textContent).toContain('Responsive interfaces, thoughtful architecture');
         expect(element.querySelectorAll('article')).toHaveLength(1);
         expect(element.querySelector('article')?.textContent).toContain('In progress');
         expect(element.querySelectorAll('a[href^="http"], a[href="#"]')).toHaveLength(0);
     });
 
-    it('resolves the home approach fragment from another page and focuses its actual section', async () => {
+    it('resolves the home About fragment from another page and focuses its actual section', async () => {
         const { fixture, router, element } = await setup('/projects');
-        element.querySelector<HTMLAnchorElement>('nav a[href="/#approach"]')!.click();
+        element.querySelector<HTMLAnchorElement>('nav a[href="/#about"]')!.click();
         await fixture.whenStable();
 
-        expect(router.url).toBe('/#approach');
+        expect(router.url).toBe('/#about');
         expect(TestBed.inject(Title).getTitle()).toBe('Home · Aurora');
-        expect(document.activeElement).toBe(element.querySelector('#approach'));
+        expect(document.activeElement).toBe(element.querySelector('#about'));
         expect(element.querySelector('nav a[aria-current="page"]')?.textContent).toBe('Home');
+    });
+
+    it('restores two About panels and a real Next chapter CTA in both languages', async () => {
+        const { fixture, element } = await setup('/');
+        for (const [lang, aboutLabel, nextLabel, narrative, stack, cta] of [
+            [
+                'en',
+                '02 / About',
+                '03 / Next chapter',
+                'Technology, design,',
+                'Tools and technologies',
+                'Explore my work',
+            ],
+            [
+                'es',
+                '02 / Acerca de',
+                '03 / Próximo capítulo',
+                'Tecnología, diseño,',
+                'Herramientas y tecnologías',
+                'Explorar mis proyectos',
+            ],
+        ]) {
+            element.querySelector<HTMLButtonElement>(`header button[lang="${lang}"]`)!.click();
+            await fixture.whenStable();
+            const about = element.querySelector('#about');
+            const next = element.querySelector('#next-chapter');
+            expect(about, 'About must be a real section').not.toBeNull();
+            expect(next, 'Next chapter must be a real section').not.toBeNull();
+            for (const section of [about!, next!]) {
+                expect(section.getAttribute('tabindex')).toBe('-1');
+                const heading = element.querySelector(
+                    `#${section.getAttribute('aria-labelledby')}`,
+                );
+                expect(heading?.tagName).toBe('H2');
+                expect(heading?.textContent?.trim()).toBeTruthy();
+            }
+            expect(about!.querySelector('.eyebrow')?.textContent).toBe(aboutLabel);
+            expect(about!.querySelectorAll('.glass')).toHaveLength(2);
+            expect(about!.textContent).toContain(narrative);
+            expect(about!.textContent).toContain(stack);
+            expect(about!.querySelector('dl')?.textContent).toContain('Angular');
+            expect(about!.querySelector('dl')?.textContent).toContain('TypeScript');
+            expect(about!.querySelector('dl')?.textContent).toContain('Tailwind CSS');
+            expect(next!.classList.contains('glass')).toBe(true);
+            expect(next!.querySelector('.eyebrow')?.textContent).toBe(nextLabel);
+            expect(next!.querySelector('a')?.getAttribute('href')).toBe('/projects');
+            expect(next!.querySelector('a')?.textContent).toContain(cta);
+            expect(about!.querySelector('#about-title br')).not.toBeNull();
+            expect(about!.querySelector('.about-panel h3 br')).not.toBeNull();
+            expect(about!.querySelector('.about-panel h3 .gradient-text')?.textContent).toBe(
+                lang === 'en' ? 'and useful ideas.' : 'e ideas útiles.',
+            );
+            expect(next!.querySelector('h2 br')).not.toBeNull();
+            expect(next!.querySelector('h2 .gradient-text')?.textContent).toBe(
+                lang === 'en' ? 'worth remembering.' : 'que deje huella.',
+            );
+            expect(element.querySelector('dialog, a[href="/about"]')).toBeNull();
+            expect(
+                element.querySelector('#approach, a[href*="approach"], a[href^="mailto:"]'),
+            ).toBeNull();
+            expect(element.textContent).not.toContain('How I want to build');
+            expect(element.textContent).not.toContain('Cómo quiero construir');
+            expect(element.querySelector('.hero a[href="/#about"]')).not.toBeNull();
+        }
+    });
+
+    it('focuses the closing target from the footer and returns from its projects CTA to About', async () => {
+        const { fixture, router, element } = await setup('/');
+        element.querySelector<HTMLAnchorElement>('footer a[href="/#next-chapter"]')!.click();
+        await fixture.whenStable();
+        expect(router.url).toBe('/#next-chapter');
+        expect(document.activeElement).toBe(element.querySelector('#next-chapter'));
+        element.querySelector<HTMLAnchorElement>('#next-chapter a')!.click();
+        await fixture.whenStable();
+        expect(router.url).toBe('/projects');
+        expect(document.activeElement).toBe(element.querySelector('main'));
+        element.querySelector<HTMLAnchorElement>('main a[href="/#about"]')!.click();
+        await fixture.whenStable();
+        expect(router.url).toBe('/#about');
+        expect(document.activeElement).toBe(element.querySelector('#about'));
     });
 
     it('falls back to main focus when a route fragment does not exist', async () => {
@@ -79,7 +159,7 @@ describe('Portfolio routes', () => {
         await fixture.whenStable();
         expect(router.url).toBe('/');
         expect(TestBed.inject(Title).getTitle()).toBe('Home · Aurora');
-        expect(element.querySelector('h1')?.textContent).toContain('Learning by building');
+        expect(element.querySelector('h1')?.textContent).toContain('Building digital');
         expect(document.activeElement).toBe(element.querySelector('main'));
     });
 
@@ -139,9 +219,9 @@ describe('Portfolio routes', () => {
         expect(document.documentElement.lang).toBe('es');
         expect(TestBed.inject(Title).getTitle()).toBe('Inicio · Aurora');
         expect(TestBed.inject(Meta).getTag('name="description"')?.content).toContain(
-            'Un portafolio de aprendizaje',
+            'Interfaces cuidadas',
         );
-        expect(element.querySelector('h1')?.textContent).toContain('Aprender construyendo');
+        expect(element.querySelector('h1')?.textContent).toContain('Creando experiencias');
         expect(element.querySelector('nav')?.getAttribute('aria-label')).toBe(
             'Navegación principal',
         );
@@ -155,23 +235,23 @@ describe('Portfolio routes', () => {
         expect(element.querySelector('article')?.textContent).toContain('Este mismo sitio:');
         expect(element.querySelector('article')?.textContent).toContain('Siguiente paso:');
         expect(element.querySelector('article ul')?.textContent).toContain('Angular');
-        expect(element.querySelector('#approach')?.textContent).toContain('Empieza por el porqué');
-        expect(element.querySelector('footer')?.textContent).toContain('Hecho con curiosidad');
+        expect(element.querySelector('#about')?.textContent).toContain('Tecnología, diseño,');
+        expect(element.querySelector('footer')?.textContent).toContain('Próximo capítulo');
         expect(group.getAttribute('aria-label')).toBe('Idioma');
 
         await router.navigateByUrl('/projects');
         await fixture.whenStable();
         expect(spanish.getAttribute('aria-pressed')).toBe('true');
         expect(element.querySelector('header [role="group"]')).toBe(group);
-        expect(element.querySelector('h1')?.textContent).toBe('Pasos pequeños. Aprendizaje real.');
+        expect(element.querySelector('h1')?.textContent).toBe('De las ideas a las interfaces.');
         expect(TestBed.inject(Title).getTitle()).toBe('Proyectos · Aurora');
         expect(element.querySelector('nav a[aria-current="page"]')?.textContent).toBe('Proyectos');
 
-        element.querySelector<HTMLAnchorElement>('nav a[href="/#approach"]')!.click();
+        element.querySelector<HTMLAnchorElement>('nav a[href="/#about"]')!.click();
         await fixture.whenStable();
-        expect(router.url).toBe('/#approach');
+        expect(router.url).toBe('/#about');
         expect(TestBed.inject(Title).getTitle()).toBe('Inicio · Aurora');
-        expect(document.activeElement).toBe(element.querySelector('#approach'));
+        expect(document.activeElement).toBe(element.querySelector('#about'));
 
         await router.navigateByUrl('/unknown');
         await fixture.whenStable();
@@ -188,7 +268,7 @@ describe('Portfolio routes', () => {
         expect(TestBed.inject(Title).getTitle()).toBe('Page not found · Aurora');
         expect(element.querySelector('h1')?.textContent).toBe("This page isn't in orbit.");
         expect(TestBed.inject(Meta).getTag('name="description"')?.content).toContain(
-            'A learning portfolio:',
+            'Thoughtful interfaces',
         );
     });
 
@@ -200,27 +280,27 @@ describe('Portfolio routes', () => {
                 node.textContent?.trim(),
             );
         expect(annotations()).toEqual([
-            'The mindset',
-            'Always exploring.',
-            'The process',
-            'Learn. Build. Repeat.',
+            'Interface',
+            'Design with purpose.',
+            'Built with',
+            'Angular · TypeScript',
         ]);
         element.querySelector<HTMLButtonElement>('header button[lang="es"]')!.click();
         await fixture.whenStable();
         expect(annotations()).toEqual([
-            'La mentalidad',
-            'Siempre explorando.',
-            'El proceso',
-            'Aprender. Crear. Repetir.',
+            'Interfaz',
+            'Diseño con propósito.',
+            'Creado con',
+            'Angular · TypeScript',
         ]);
         expect(artwork.getAttribute('aria-hidden')).toBe('true');
         element.querySelector<HTMLButtonElement>('header button[lang="en"]')!.click();
         await fixture.whenStable();
         expect(annotations()).toEqual([
-            'The mindset',
-            'Always exploring.',
-            'The process',
-            'Learn. Build. Repeat.',
+            'Interface',
+            'Design with purpose.',
+            'Built with',
+            'Angular · TypeScript',
         ]);
     });
 
@@ -287,6 +367,6 @@ describe('Portfolio routes', () => {
         await fixture.whenStable();
         expect(document.documentElement.lang).toBe('en');
         expect(TestBed.inject(Title).getTitle()).toBe('Home · Aurora');
-        expect(element.querySelector('h1')?.textContent).toContain('Learning by building');
+        expect(element.querySelector('h1')?.textContent).toContain('Building digital');
     });
 });

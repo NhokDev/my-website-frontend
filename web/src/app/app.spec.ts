@@ -22,7 +22,7 @@ describe('App', () => {
         expect(app).toBeTruthy();
     });
 
-    it('renders the learning home inside an accessible navigation shell', async () => {
+    it('renders the portfolio home inside an accessible navigation shell', async () => {
         const fixture = TestBed.createComponent(App);
         await TestBed.inject(Router).navigateByUrl('/');
         await fixture.whenStable();
@@ -30,7 +30,7 @@ describe('App', () => {
         expect(compiled.querySelector('header nav')?.getAttribute('aria-label')).toBe(
             'Main navigation',
         );
-        expect(compiled.querySelector('h1')?.textContent).toContain('Learning by building');
+        expect(compiled.querySelector('h1')?.textContent).toContain('Building digital');
         expect(compiled.querySelectorAll('h1')).toHaveLength(1);
         expect(compiled.querySelector('a.skip-link')?.getAttribute('href')).toBe('#main-content');
         expect(compiled.querySelector('main#main-content')?.getAttribute('tabindex')).toBe('-1');
