@@ -72,6 +72,18 @@ do not apply quote overrides or run a repository-wide formatting rewrite.
   Brand names, technology names, and language autonyms may remain unchanged.
 - Verify affected content in both languages and preserve catalog-parity tests. A development
   with missing translations in either language is incomplete.
+- Group localization providers in `web/src/i18n/provide-i18n.ts` through `provideI18n()`;
+  `web/src/app/app.config.ts` consumes this helper and keeps general HTTP provisioning app-wide.
+  Keep the loader and title strategy implementations in `web/src/app/i18n/`.
+- Use Transloco keys with its pipes or directive in templates and `TranslocoService` in
+  TypeScript for translations and active-language changes. The loader retrieves catalogs;
+  do not use it as a UI translation service.
+- Account for asynchronous catalog loading with `selectTranslate()` or `selectTranslation()`;
+  do not call synchronous `translate()` before the required catalog has loaded.
+- Keep `web/src/index.html` in English (`lang="en"`) with initial title and description
+  fallbacks matching `metadata.titles.home` and `metadata.description` in the English catalog.
+  Never retain obsolete public copy there; `LocalizedTitleStrategy` owns reactive title,
+  document language, and description updates.
 
 ## Scope guardrails
 

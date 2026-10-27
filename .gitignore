@@ -40,6 +40,10 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
+# Machine-specific generated skill registry
+/.atl/skill-registry.md
+/.atl/.skill-registry.cache.json
+
 /.angular/
 /web/.angular/
 .sass-cache/
